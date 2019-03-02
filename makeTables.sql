@@ -1,13 +1,13 @@
 
 CREATE TABLE Ovelsesgruppe (
-	gruppeID 	INTEGER NOT NULL,
-    navn 		VARCHAR(30),
+	gruppeID 	INTEGER 	NOT NULL,
+    navn 		VARCHAR(30) NOT NULL,
     CONSTRAINT gruppe_PK PRIMARY KEY (gruppeID)
 );
 
 CREATE TABLE Ovelse (
-	ovelseID 	INTEGER NOT NULL,
-    navn 		VARCHAR(30),
+	ovelseID 	INTEGER 	NOT NULL,
+    navn 		VARCHAR(30) NOT NULL,
     gruppeID 	INTEGER,
     CONSTRAINT ovelse_PK PRIMARY KEY (ovelseID),
     CONSTRAINT ovelsesgruppe_FK FOREIGN KEY (gruppeID) REFERENCES Ovelsesgruppe(gruppeID)
@@ -16,8 +16,8 @@ CREATE TABLE Ovelse (
 );
 
 CREATE TABLE Person (
-	personID 		INTEGER NOT NULL,
-    navn 			VARCHAR(30),
+	personID 		INTEGER 	NOT NULL,
+    navn 			VARCHAR(30) NOT NULL,
     tlfnr 			INTEGER,
     favorittovelse 	INTEGER,
     CONSTRAINT person_PK PRIMARY KEY (personID),
@@ -28,13 +28,13 @@ CREATE TABLE Person (
 
 CREATE TABLE Treningsokt (
 	oktID 			INTEGER NOT NULL,
-    dato 			DATE,
-    tidspunkt 		TIME,
-    varighet 		INTEGER,
+    dato 			DATE	NOT NULL,
+    tidspunkt 		TIME	NOT NULL,
+    varighet 		INTEGER NOT NULL,
     form 			INTEGER,
     prestasjon 		INTEGER,
     treningspartner INTEGER,
-    notat VARCHAR(250),
+    notat 			VARCHAR(250),
     CONSTRAINT treningsokt_PK PRIMARY KEY (oktID),
     CONSTRAINT person_FK FOREIGN KEY (treningspartner) REFERENCES Person(personID)
 													   ON UPDATE CASCADE
@@ -42,8 +42,8 @@ CREATE TABLE Treningsokt (
 );
 
 CREATE TABLE Apparat (
-	apparatID 	INTEGER NOT NULL,
-    navn 		VARCHAR(30),
+	apparatID 	INTEGER 	NOT NULL,
+    navn 		VARCHAR(30) NOT NULL,
     beskrivelse VARCHAR(200),
     CONSTRAINT apparat_PK PRIMARY KEY (apparatID)
 );
@@ -60,7 +60,7 @@ CREATE TABLE Fastmontert (
 	ovelseID 	INTEGER NOT NULL,
     antall_kg 	INTEGER,
     antall_sett INTEGER,
-    apparat 	INTEGER,
+    apparat 	INTEGER NOT NULL,
     CONSTRAINT fastmontert_FK FOREIGN KEY (ovelseID) REFERENCES Ovelse(ovelseID)
 												     ON UPDATE CASCADE
                                                      ON DELETE CASCADE,
