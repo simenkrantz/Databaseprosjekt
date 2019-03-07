@@ -25,7 +25,7 @@ INSERT INTO Fastmontert VALUES (1,120,10,1),(2,10,3,3),
 INSERT INTO Person VALUES (1,'Kjell Aukrust','69696969',6),(2,'Harald Heide Steen','41454554',12),
 (3,'OJ (not Simpson)','98564211',9),(4,'Halvor','Not for you',1),(5,'Simen','44111425',3);
 
-INSERT INTO Treningsokt VALUES (1,'2019-03-02', '13:08:00', 60,10,10,NULL,'OK');
+INSERT INTO Treningsokt VALUES (1,'2019-03-02', '13:08:00', 60,NULL,'OK');
 UPDATE Treningsokt
 SET treningspartner = 1
 WHERE oktID = 1;
