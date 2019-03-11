@@ -9,23 +9,33 @@ import java.util.*;
 
 public class Treningsokt extends tdb.ActiveDomainObject {
     private static int oktID = 1;
-    private int dato;
-    private int tidspunkt;
+    private int dato;       //endre type?
+    private int tidspunkt;  // endre type?
     private int varighet;
     private String notat;
     private tdb.Person treningspartner;
     private ArrayList<tdb.Ovelse> ovelser;
 
-    public Treningsokt (int startTid, int timer, int type) {
-        aid = NOID;
-        this.startTid = startTid;
-        this.timer = timer;
-        this.type = type;
+    public Treningsokt(int dato, int tidspunkt, int varighet, String notat) {
+        this.dato =  dato;
+        this.tidspunkt = tidspunkt;
+        this.varighet = varighet;
+        this.notat = notat;
         ovelser = new ArrayList<tdb.Ovelse>();
     }
 
-    public void regOvelse (String navn, int gruppeID, Connection conn) {
-        tdb.Ovelse o = new tdb.Ovelse(navn, gruppeID);
+    public Treningsokt(int dato, int tidspunkt, int varighet, tdb.Person partner, String notat) {
+        this.dato =  dato;
+        this.tidspunkt = tidspunkt;
+        this.varighet = varighet;
+        this.notat = notat;
+        treningspartner = partner;
+        ovelser = new ArrayList<tdb.Ovelse>();
+    }
+
+
+    public void regOvelse (String navn, int gruppeID, int form, int prestasjon, Connection conn) {
+        tdb.Ovelse o = new tdb.Ovelse(navn, gruppeID, form, prestasjon);
         o.initialize (conn);
         ovelser.add(o);
     }
@@ -39,7 +49,12 @@ public class Treningsokt extends tdb.ActiveDomainObject {
     public void initialize (Connection conn) {
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select starttid, timer, alarmtype from Avtale where aid=" + aid);
+            ResultSet rs =
+                    stmt.executeQuery(
+                            "select dato, tidspunkt, varighet, notat, Person.navn, tlfnr, Ovelse.navn AS favorittovelse " +
+                            "from (Treningsokt INNER JOIN Person ON Treningsokt.treningspartner = Person.personID)" +
+                                    "INNER JOIN Ovelse ON Person.favorittovelse = Ovelse.ovelseID " +
+                                    "where oktID=" + oktID);
             while (rs.next()) {
                 startTid =  rs.getInt("starttid");
                 timer = rs.getInt("timer");

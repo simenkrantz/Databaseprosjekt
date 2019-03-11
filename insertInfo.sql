@@ -23,7 +23,7 @@ INSERT INTO Fastmontert VALUES (1,120,10,1),(2,10,3,3),
 
 -- ID, Navn, Tlf.nr, Favorittøvelse
 INSERT INTO Person VALUES (1,'Kjell Aukrust','69696969',6),(2,'Harald Heide Steen','41454554',12),
-(3,'OJ (not Simpson)','98564211',9),(4,'Halvor','Not for you',1),(5,'Simen','44111425',3);
+(3,'OJ (not Simpson)','98564211',9),(4,'Halvor','97470077',1),(5,'Simen','44111425',3);
 
 -- ID, Dato YYYY-MM-DD, Tidspunkt hh:mm:ss, Varighet [min], Treningspartner, Notat
 INSERT INTO Treningsokt VALUES (1,'2019-03-02', '13:08:00', 60,NULL,'OK');
