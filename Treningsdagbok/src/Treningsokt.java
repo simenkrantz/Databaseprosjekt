@@ -13,7 +13,7 @@ public class Treningsokt extends tdb.ActiveDomainObject {
     private int tidspunkt;
     private int varighet;
     private String notat;
-    private Person treningspartner;
+    private tdb.Person treningspartner;
     private ArrayList<tdb.Ovelse> ovelser;
 
     public Treningsokt (int startTid, int timer, int type) {
