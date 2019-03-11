@@ -20,6 +20,16 @@ public class Person extends tdb.ActiveDomainObject {
         personID += 1;
     }
 
+    public void setNavn(String navn){
+        this.navn = navn;
+    }
+    public void setTelefonnummer(int nummer){
+        this.telefonnummer = nummer;
+    }
+    public void setFavorittOvelse(tdb.Ovelse ovelse){
+        this.favorittOvelse = ovelse;
+    }
+
     @Override
     public void initialize (Connection conn) {
         try {

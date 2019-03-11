@@ -9,14 +9,14 @@ import java.util.*;
 
 public class Treningsokt extends tdb.ActiveDomainObject {
     private static int oktID = 1;
-    private int dato;       //endre type?
-    private int tidspunkt;  // endre type?
+    private String dato;       //endre type?
+    private String tidspunkt;  // endre type?
     private int varighet;
     private String notat;
     private tdb.Person treningspartner;
     private ArrayList<tdb.Ovelse> ovelser;
 
-    public Treningsokt(int dato, int tidspunkt, int varighet, String notat) {
+    public Treningsokt(String dato, String tidspunkt, int varighet, String notat) {
         this.dato =  dato;
         this.tidspunkt = tidspunkt;
         this.varighet = varighet;
@@ -24,7 +24,7 @@ public class Treningsokt extends tdb.ActiveDomainObject {
         ovelser = new ArrayList<tdb.Ovelse>();
     }
 
-    public Treningsokt(int dato, int tidspunkt, int varighet, tdb.Person partner, String notat) {
+    public Treningsokt(String dato, String tidspunkt, int varighet, tdb.Person partner, String notat) {
         this.dato =  dato;
         this.tidspunkt = tidspunkt;
         this.varighet = varighet;
@@ -51,14 +51,22 @@ public class Treningsokt extends tdb.ActiveDomainObject {
             Statement stmt = conn.createStatement();
             ResultSet rs =
                     stmt.executeQuery(
-                            "select dato, tidspunkt, varighet, notat, Person.navn, tlfnr, Ovelse.navn AS favorittovelse " +
+                            "select dato, tidspunkt, varighet, notat, Person.navn, tlfnr, Ovelse.navn AS favorittovelse, Ovelse.gruppeID" +
                             "from (Treningsokt INNER JOIN Person ON Treningsokt.treningspartner = Person.personID)" +
                                     "INNER JOIN Ovelse ON Person.favorittovelse = Ovelse.ovelseID " +
                                     "where oktID=" + oktID);
             while (rs.next()) {
-                startTid =  rs.getInt("starttid");
-                timer = rs.getInt("timer");
-                type = rs.getInt("avtaletype");
+                this.dato = rs.getString("dato");
+                this.tidspunkt = rs.getString("tidspunkt");
+                this.varighet = rs.getInt("varighet");
+                this.notat = rs.getString("notat");
+                //this.treningspartner.setNavn(rs.getString("navn"));
+                //this.treningspartner.setTelefonnummer(rs.getInt("tlfnr"));
+                /*this.treningspartner =
+                        new tdb.Person(rs.getString("navn"),
+                                rs.getInt("tlfnr"),
+                                new tdb.Ovelse(rs.getString("favorittovelse"),rs.getInt("gruppeID"));*/
+                //HVORDAN SETTE FAVORITTØVELSE? LAGE NY OVELSE MED NEW?
             }
 
         } catch (Exception e) {
