@@ -1,7 +1,4 @@
-/*
-* @author Svein Erik
-*/
-package ekt;
+package tdb;
 
 import java.sql.*;
 import java.util.Properties;
@@ -15,7 +12,7 @@ public abstract class DBConn {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             // Properties for user and password. Here the user and password are both 'paulr'
             Properties p = new Properties();
-            p.put("user", "myuser");
+            p.put("user", "root");
             p.put("password", "mypassword");
             //            conn = DriverManager.getConnection("jdbc:mysql://mysql.ansatt.ntnu.no/sveinbra_ektdb?autoReconnect=true&useSSL=false",p);
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/ekt?autoReconnect=true&useSSL=false",p);
