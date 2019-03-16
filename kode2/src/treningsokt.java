@@ -1,66 +1,53 @@
 public class Treningsokt {
     static private int oktID = 1;
-    private String dato;
-    private String startTid;
+    private java.sql.Date dato;
+    private java.sql.Time startTid;
     private int varighet;
     private String notat;
     private Person partner;
+    private ArrayList<Ovelse> ovelser;
 
-    public Treningsokt(String dato, String startTid, int varighet) {
+    public Treningsokt(String dato, java.sql.Time startTid, int varighet) {
         this.oktID += 1;
         this.dato = dato;
         this.startTid = startTid;
         this.varighet = varighet;
         this.notat = "";
         this.partner = null;
+        this.ovelser = new ArrayList<Ovelse>();
     }
 
-    public Treningsokt(String dato, String startTid, int varighet, String notat, Person partner) {
+    public Treningsokt(java.sql.Date dato, java.sql.Time startTid, int varighet, String notat, Person partner) {
         this.oktID += 1;
         this.dato = dato;
         this.startTid = startTid;
         this.varighet = varighet;
         this.notat = notat;
         this.partner = partner;
+        this.ovelser = new ArrayList<Ovelse>();
     }
 
-    public String getDato() {
-        return dato;
-    }
+    public String getDato() { return dato; }
 
-    public void setDato(String dato) {
-        this.dato = dato;
-    }
+    public void setDato(java.sql.Date dato) { this.dato = dato; }
 
-    public String getStartTid() {
-        return startTid;
-    }
+    public String getStartTid() { return startTid; }
 
-    public void setStartTid(String tid) {
-        startTid = tid;
-    }
+    public void setStartTid(java.sql.Time tid) { startTid = tid; }
 
-    public int getVarighet() {
-        return startTid;
-    }
+    public int getVarighet() { return startTid; }
 
-    public void setVarighet(int minutter) {
-        varighet = minutter;
-    }
+    public void setVarighet(int minutter) { varighet = minutter; }
 
-    public String getNotat() {
-        return notat;
-    }
+    public String getNotat() { return notat; }
 
-    public void setNotat(String notat) {
-        this.notat = notat;
-    }
+    public void setNotat(String notat) { this.notat = notat; }
 
-    public Person getPartner() {
-        return partner;
-    }
+    public Person getPartner() { return partner; }
 
-    public void setPartner(Person partner) {
-        this.partner = partner;
-    }
+    public void setPartner(Person partner) { this.partner = partner; }
+
+    public void addOvelse(Ovelse ovelse) { ovelser.add(ovelse); }
+
+    public ArrayList<Ovelse> getOvelser() { return ovelser; }
 }
