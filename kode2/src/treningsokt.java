@@ -5,6 +5,7 @@ public class Treningsokt {
     private int varighet;
     private String notat;
     private Person partner;
+    private List<Ovelse> ovelser;
 
     public Treningsokt(String dato, String startTid, int varighet) {
         this.oktID += 1;
