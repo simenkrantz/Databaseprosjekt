@@ -5,10 +5,9 @@ public class Ovelsesgruppe {
 
     static private int gruppeID = 1;
     private String navn = null;
-    private List<Ovelse> ovelser;
+    private List<Ovelse> ovelser = new ArrayList<Ovelse>();
 
     public Ovelsesgruppe(String navn){
-        ovelser = new ArrayList<Ovelse>();
         this.navn = navn;
         this.gruppeID = gruppeID;
         gruppeID += 1;
