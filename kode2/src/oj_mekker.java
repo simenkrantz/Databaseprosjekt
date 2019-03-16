@@ -1,7 +1,7 @@
 import java.sql.*;
 import java.sql.Date;
 
-public class DBOperations {
+public class oj_mekker {
 
     public static void addPerson(Connection conn, int personID, String navn, int telefonnummer, Ovelse favorittOvelse) {
 
@@ -13,7 +13,7 @@ public class DBOperations {
             prepStat.setInt(1, personID);
             prepStat.setString(2, navn);
             prepStat.setInt(3, telefonnummer);
-            prepStat.setInt(4, favorittOvelse);
+            prepStat.setInt(4, favorittOvelse.getOvelseID());
 
             prepStat.execute();
 

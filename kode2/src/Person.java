@@ -24,7 +24,7 @@ public class Person {
         this.personID = personID;
     }
 
-    public String getPersonID() {return this.personID;}
+    public int getPersonID() {return this.personID;}
 
     public String getNavn() {return this.navn;}
 

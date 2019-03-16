@@ -16,13 +16,13 @@ public class DBOpOKTSKK {
             prepStat.setInt(1, oktID);
             prepStat.setDate(2, dato);
             prepStat.setTime(3, tidspunkt);
-            prepStat.setInt(4, varighet)
-            prepStat.setInt(5. partnerID);
+            prepStat.setInt(4, varighet);
+            prepStat.setInt(5, partnerID);
             prepStat.setString(6, notat);
 
             prepStat.execute();
 
-            System.out.println("Økt med ID " + String.valueOf(okt.getOktID()) + " lagt til.");
+            System.out.println("Økt med ID " + String.valueOf(oktID) + " lagt til.");
 
         }
         catch (Exception e) {
@@ -37,12 +37,7 @@ public class DBOpOKTSKK {
         System.out.println("Skriv inn antall [int] siste treningsøkter: ");
         String temp = sc.nextLine();
 
-        try {
-            int num = Integer.parseInt(temp);
-        } catch (NumberFormatException e) {
-            System.out.println("Error, entry not an integer!");
-            getLastWorkoutNotes(conn);
-        }
+        int num = Integer.parseInt(temp);
 
         String query = "SELECT notat FROM Treningsokt";
 

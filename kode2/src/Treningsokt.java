@@ -13,7 +13,7 @@ public class Treningsokt {
     public Treningsokt(int oktID, java.sql.Date dato, java.sql.Time tidspunkt, int varighet) {
         this.oktID = oktID;
         this.dato = dato;
-        this.startTid = tidspunkt;
+        this.tidspunkt = tidspunkt;
         this.varighet = varighet;
         this.notat = "";
         this.partner = null;
@@ -23,7 +23,7 @@ public class Treningsokt {
     public Treningsokt(int oktID, java.sql.Date dato, java.sql.Time tidspunkt, int varighet, String notat) {
         this.oktID = oktID;
         this.dato = dato;
-        this.startTid = tidspunkt;
+        this.tidspunkt = tidspunkt;
         this.varighet = varighet;
         this.notat = notat;
         this.partner = null;
@@ -33,7 +33,7 @@ public class Treningsokt {
     public Treningsokt(int oktID, java.sql.Date dato, java.sql.Time tidspunkt, int varighet, String notat, Person partner) {
         this.oktID = oktID;
         this.dato = dato;
-        this.startTid = tidspunkt;
+        this.tidspunkt = tidspunkt;
         this.varighet = varighet;
         this.notat = notat;
         this.partner = partner;

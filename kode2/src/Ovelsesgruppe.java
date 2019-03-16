@@ -12,7 +12,7 @@ public class Ovelsesgruppe {
         this.navn = navn;
     }
 
-    public String getGruppeID() {return this.gruppeID;}
+    public int getGruppeID() {return this.gruppeID;}
 
     public String getNavn() {return this.navn;}
 

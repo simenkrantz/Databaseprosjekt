@@ -5,7 +5,7 @@ import java.util.List;
 
 public class DBOperations {
 
-    public static void addApparat(Connection conn, int apparatID, String navn, String beskrivelse) {
+    public static void addApparat(Connection conn, String navn, String beskrivelse) {
         
         String query = "INSERT INTO Apparat (navn, beskrivelse) VALUES (?,?)";
         
@@ -55,6 +55,32 @@ public class DBOperations {
         }
     }
 
+    public static void addFrittstaende(Connection conn, String navn, int form, int prestasjon, String beskrivelse) {
+
+        String queryOvelse = "INSERT INTO Ovelse (navn, form, prestasjon) VALUES (?,?,?)";
+        String queryFritt = "INSERT INTO Fastmontert (ovelseID, beskrivelse) VALUES (?,?)";
+
+        try {
+            PreparedStatement prepStatOvelse = conn.prepareStatement(queryOvelse);
+            PreparedStatement prepStatFritt = conn.prepareStatement(queryFritt);
+
+            prepStatOvelse.setString(1, navn);
+            prepStatOvelse.setInt(2, form);
+            prepStatOvelse.setInt(3, prestasjon);
+
+            prepStatFritt.setInt(1, getHoyesteOvelseID(conn));
+            prepStatFritt.setString(2, beskrivelse);
+
+            prepStatOvelse.execute();
+            prepStatFritt.execute();
+
+            System.out.println("Frittstående ovelse lagt til");
+
+        } catch (Exception e) {
+            throw new RuntimeException("DB error when inserting Frittstående", e);
+        }
+    }
+
     public static List<Apparat> getApparater(Connection conn) throws SQLException{
         List<Apparat> apparater = new ArrayList<>();
 
@@ -63,7 +89,7 @@ public class DBOperations {
         ResultSet rs = prepStat.executeQuery();
 
         while(rs.next()){
-            Apparat apparat = new Apparat(rs.getString("navn"), rs.getString("beskrivelse"));
+            Apparat apparat = new Apparat(rs.getInt("apparatID"),rs.getString("navn"), rs.getString("beskrivelse"));
             apparater.add(apparat);
         }
         return apparater;
@@ -83,19 +109,20 @@ public class DBOperations {
             ovelser.add(o);
         }
 
-        String stmt = "select * from Fastmontert";
-        PreparedStatement prepStat = conn.prepareStatement(stmt);
-        ResultSet rs = prepStat.executeQuery();
+        String stmt2 = "select * from Fastmontert";
+        PreparedStatement prepStat2 = conn.prepareStatement(stmt2);
+        ResultSet rs2 = prepStat2.executeQuery();
 
-        while(rs.next()) {
+        while(rs2.next()) {
             for(Apparat a : getApparater(conn)){
-                if (a.getApparatID() == rs.getInt("apparat")){
-                    Ovelse o = new Fastmontert(rs.getInt("ovelseID"), rs.getString("navn"), rs.getInt("form"), 
-                                                rs.getInt("prestasjon"), rs.getInt("antall_kg"),rs.getInt("antall_sett"), a);
+                if (a.getApparatID() == rs2.getInt("apparat")){
+                    Ovelse o = new Fastmontert(rs2.getInt("ovelseID"), rs2.getString("navn"), rs2.getInt("form"),
+                                                rs2.getInt("prestasjon"), rs2.getInt("antall_kg"),rs2.getInt("antall_sett"), a);
                     ovelser.add(o);
                 }
             } 
         }
+        return ovelser;
     }
 
     public static int getHoyesteOvelseID(Connection conn) throws SQLException {
@@ -118,7 +145,7 @@ public class DBOperations {
         ResultSet rs = prepStat.executeQuery();
 
         while(rs.next()) {
-            if (rs.getInt("ovelseID") != null){
+            if (rs.getObject("ovelseID") != null){
                 for (Ovelse o : getOvelser(conn)){
                     if(o.getOvelseID() == rs.getInt("ovelseID")){
                         Person p = new Person(rs.getInt("personID"), rs.getString("navn"), rs.getInt("tlfnr"), o);
@@ -130,27 +157,28 @@ public class DBOperations {
                 personer.add(p);
             }
         }
+        return personer;
     }
 
-    public static List<TreningsOkt> getTreningsOkter(Connection conn) throws SQLException{
+    public static List<Treningsokt> getTreningsOkter(Connection conn) throws SQLException{
     		
-        List<TreningsOkt> treningsOkter = new ArrayList<TreningsOkt>();
+        List<Treningsokt> treningsOkter = new ArrayList<Treningsokt>();
         
         String stmt = "select * from Treningsokt";
         PreparedStatement prepStat = conn.prepareStatement(stmt);
         ResultSet rs = prepStat.executeQuery();
         
         while(rs.next()) {
-            if (rs.getInt("personID") != null){
+            if (rs.getObject("personID") != null){
                 for (Person p : getPersoner(conn)){
                     if (rs.getInt("personID") == p.getPersonID()){
-                        TreningsOkt t = new TreningsOkt(rs.getInt("oktID") , rs.getDate("dato"), rs.getTime("tidspunkt"), 
+                        Treningsokt t = new Treningsokt(rs.getInt("oktID") , rs.getDate("dato"), rs.getTime("tidspunkt"),
                                                         rs.getInt("varighet"), rs.getString("notat"), p);
                         treningsOkter.add(t);
                     }
                 }
             } else {
-                TreningsOkt t = new TreningsOkt(rs.getInt("oktID") , rs.getDate("dato"), rs.getTime("tidspunkt"), 
+                Treningsokt t = new Treningsokt(rs.getInt("oktID") , rs.getDate("dato"), rs.getTime("tidspunkt"),
                 rs.getInt("varighet"), rs.getString("notat"));
             }
         }

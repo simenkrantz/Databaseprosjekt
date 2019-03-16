@@ -1,3 +1,4 @@
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -10,10 +11,8 @@ public class TreningsCtrl extends DBConn {
 
         System.out.println("Skriv inn beskrivelse på apparat: ");
         String beskrivelse = scanner.nextLine();
-        
-        Apparat a1 = new Apparat(navn, beskrivelse);
 
-        DBOperations.addApparat(conn, a1.getApparatID(), a1.getNavn(), a1.getBeskrivelse());
+        DBOperations.addApparat(conn, navn, beskrivelse);
      }
 
      public void addOvelse() throws SQLException {
@@ -42,8 +41,8 @@ public class TreningsCtrl extends DBConn {
             System.out.println("Skriv inn apparatID: ");
             int apparatID = Integer.parseInt(scanner.nextLine());
 
-            bool apparatOK = false;
-            for (Apparat a : DBOperations.getApparater()){
+            boolean apparatOK = false;
+            for (Apparat a : DBOperations.getApparater(conn)){
                 if (apparatID == a.getApparatID()){
                     apparatOK = true;
                     DBOperations.addFastmontert(conn, navn, form, prestasjon, antallKg, antallSett, a);
@@ -51,13 +50,13 @@ public class TreningsCtrl extends DBConn {
                 }
             }
             if(!apparatOK){
-                System.out.println("Apparatet finnes ikke")
+                System.out.println("Apparatet finnes ikke");
             }
         } else {
             System.out.println("Skriv inn beskrivelse på øvelse: ");
             String beskrivelse = scanner.nextLine();
 
-            DBOperations.addFrittstaende(conn, navn, form, prestasjon,)
+            DBOperations.addFrittstaende(conn, navn, form, prestasjon,beskrivelse);
         }
 
 
