@@ -129,4 +129,39 @@ public class TreningsCtrl extends DBConn {
             DBOperations.addPerson(conn, navn, telefonnummer);
         }
     }
+
+    public void addOvelseToTreningsokt() throws SQLException {
+        Scanner scanner = new Scanner(System.in);
+        DBOperations.printTreningsokter(conn);
+        System.out.println("Skriv inn id på økten du vil legge til øvelse i: ");
+        int oktID = Integer.parseInt(scanner.nextLine());
+
+        DBOperations.printOvelser(conn);
+
+        System.out.println("Skriv inn id på øvelsen du vil legge til i økten: ");
+        int ovelseID = Integer.parseInt(scanner.nextLine());
+
+        boolean OK = false;
+        for (Treningsokt t : DBOperations.getTreningsOkter(conn)) {
+            if (oktID == t.getOktID()) {
+                for (Ovelse o : DBOperations.getOvelser(conn)) {
+                    if (ovelseID == o.getOvelseID()) {
+                        OK = true;
+                        DBOperations.addOvelseToTreningsokt(conn, t, o);
+                        break;
+                    }
+                }
+                break;
+            }
+
+        }
+
+        if (!OK) {
+            System.out.println("Ovelsen eller økten finnes ikke");
+        }
+    }
+
+    public void printApparater() throws SQLException {
+        DBOperations.printApparater(conn);
+    }
 }

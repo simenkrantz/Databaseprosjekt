@@ -177,6 +177,25 @@ public class DBOperations {
         }
     }
 
+    public static void addOvelseToTreningsokt(Connection conn, Treningsokt okt, Ovelse ovelse) {
+        String query = "INSERT INTO Ovelseriokt(oktID, ovelseID) VALUES (?,?)";
+
+        try {
+            PreparedStatement prepStat = conn.prepareStatement(query);
+
+            prepStat.setInt(1, okt.getOktID());
+            prepStat.setInt(2, ovelse.getOvelseID());
+
+            prepStat.execute();
+
+            System.out.println("Øvelse " + ovelse.getNavn() + " lagt til i økt " + okt.getOktID());
+
+        }
+        catch (Exception e) {
+            throw new RuntimeException("Error ved inserting av øvelse i økt", e);
+        }
+    }
+
 
     public static List<Apparat> getApparater(Connection conn) throws SQLException{
         List<Apparat> apparater = new ArrayList<>();
@@ -275,9 +294,9 @@ public class DBOperations {
         ResultSet rs = prepStat.executeQuery();
         
         while(rs.next()) {
-            if (rs.getObject("personID") != null){
+            if (rs.getObject("treningspartner") != null){
                 for (Person p : getPersoner(conn)){
-                    if (rs.getInt("personID") == p.getPersonID()){
+                    if (rs.getInt("treningspartner") == p.getPersonID()){
                         Treningsokt t = new Treningsokt(rs.getInt("oktID") , rs.getDate("dato"), rs.getTime("tidspunkt"),
                                                         rs.getInt("varighet"), rs.getString("notat"), p);
                         treningsOkter.add(t);
@@ -286,6 +305,7 @@ public class DBOperations {
             } else {
                 Treningsokt t = new Treningsokt(rs.getInt("oktID") , rs.getDate("dato"), rs.getTime("tidspunkt"),
                 rs.getInt("varighet"), rs.getString("notat"));
+                treningsOkter.add(t);
             }
         }
         
@@ -319,6 +339,17 @@ public class DBOperations {
 
         while(rs.next()){
             System.out.println("ID: " + rs.getInt("ovelseID") + ", navn: " + rs.getString("navn"));
+        }
+    }
+
+    public  static void printTreningsokter(Connection conn) throws SQLException {
+        String queryStatement = "SELECT * FROM Treningsokt";
+        PreparedStatement prepStat = conn.prepareStatement(queryStatement);
+        ResultSet rs = prepStat.executeQuery();
+
+        while(rs.next()){
+            System.out.println("ID: " + rs.getInt("oktID") +
+                    ", dato: " + rs.getString("dato")+", tidspunkt: " + rs.getString("tidspunkt"));
         }
     }
 }
