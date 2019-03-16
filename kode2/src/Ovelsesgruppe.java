@@ -9,15 +9,13 @@ public class Ovelsesgruppe {
 
     public Ovelsesgruppe(String navn){
         this.navn = navn;
-        this.gruppeID = gruppeID;
         gruppeID += 1;
     }
 
-    public String getNavn(){
-        return this.navn;
-    }
+    public String getGruppeID() {return this.gruppeID;}
 
-    public List<Ovelse> getOvelser(){
-        return this.ovelser;
-    }
+    public String getNavn() {return this.navn;}
+
+    public List<Ovelse> getOvelser() {return this.ovelser;}
+    
 }
