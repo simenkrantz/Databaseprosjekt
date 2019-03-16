@@ -18,6 +18,10 @@ public class Ovelse {
         this.prestasjon = prestasjon;
     }
 
+    public int getOvelseID() {
+        return ovelseID;
+    }
+
     public String getNavn() {
         return navn;
     }

@@ -18,6 +18,9 @@ public class Apparat {
         apparatID += 1;
     }
 
+    public int getApparatID() {
+        return apparatID;
+    }
     public String getNavn(){
         return this.navn;
     }

@@ -16,7 +16,5 @@ public class TreningsCtrl extends DBConn {
         Apparat benk = new Apparat(navn, beskrivelse);
         
         DBOperations.addApparat(conn, benk);
-    
- 
      }
 }
