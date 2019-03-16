@@ -63,7 +63,7 @@ CREATE TABLE Fastmontert (
     CONSTRAINT fastmontert_FK FOREIGN KEY (ovelseID) REFERENCES Ovelse(ovelseID)
 												     ON UPDATE CASCADE
                                                      ON DELETE CASCADE,
-    CONSTRAINT apparat_FK FOREIGN KEY (apparat) REFERENCES apparat(apparatID)
+    CONSTRAINT apparat_FK FOREIGN KEY (apparat) REFERENCES Apparat(apparatID)
 											    ON UPDATE CASCADE
                                                 ON DELETE CASCADE
 );
