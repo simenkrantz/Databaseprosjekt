@@ -4,40 +4,41 @@ import java.util.List;
 public class Treningsokt {
     static private int oktID = 0;
     private java.sql.Date dato;
-    private java.sql.Time startTid;
+    private java.sql.Time tidspunkt;
     private int varighet;
     private String notat;
     private Person partner;
     private List<Ovelse> ovelser;
 
-    public Treningsokt(java.sql.Date dato, java.sql.Time startTid, int varighet) {
+    public Treningsokt(java.sql.Date dato, java.sql.Time tidspunkt, int varighet) {
         oktID += 1;
         this.dato = dato;
-        this.startTid = startTid;
+        this.startTid = tidspunkt;
         this.varighet = varighet;
         this.notat = "";
         this.partner = null;
         this.ovelser = new ArrayList<Ovelse>();
     }
 
-    public Treningsokt(java.sql.Date dato, java.sql.Time startTid, int varighet, String notat, Person partner) {
-        this.oktID = oktID;
+    public Treningsokt(java.sql.Date dato, java.sql.Time tidspunkt, int varighet, String notat, Person partner) {
         oktID += 1;
         this.dato = dato;
-        this.startTid = startTid;
+        this.startTid = tidspunkt;
         this.varighet = varighet;
         this.notat = notat;
         this.partner = partner;
         this.ovelser = new ArrayList<Ovelse>();
     }
 
+    public int getOktID() { return oktID; }
+
     public java.sql.Date getDato() { return dato; }
 
     public void setDato(java.sql.Date dato) { this.dato = dato; }
 
-    public java.sql.Time getStartTid() { return startTid; }
+    public java.sql.Time getTidspunkt() { return tidspunkt; }
 
-    public void setStartTid(java.sql.Time tid) { startTid = tid; }
+    public void setTidspunkt(java.sql.Time tid) { tidspunkt = tid; }
 
     public int getVarighet() { return varighet; }
 
