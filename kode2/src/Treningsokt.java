@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Treningsokt {
     static private int oktID = 1;
     private java.sql.Date dato;
@@ -37,7 +40,7 @@ public class Treningsokt {
 
     public void setStartTid(java.sql.Time tid) { startTid = tid; }
 
-    public int getVarighet() { return startTid; }
+    public int getVarighet() { return varighet; }
 
     public void setVarighet(int minutter) { varighet = minutter; }
 
