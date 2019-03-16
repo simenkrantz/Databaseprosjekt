@@ -1,18 +1,18 @@
 
 public class Ovelse {
 
-    static private int ovelseID = 1;
+    private int ovelseID;
     private String navn = null;
     private int form;
     private int prestasjon;
 
-    public Ovelse(String navn){
-        ovelseID += 1;
+    public Ovelse(int ovelseID, String navn){
+        this.ovelseID = ovelseID;
         this.navn = navn;
     }
 
-    public Ovelse(String navn, int form, int prestasjon) {
-        ovelseID += 1;
+    public Ovelse(int ovelseID, String navn, int form, int prestasjon) {
+        this.ovelseID = ovelseID;
         this.navn = navn;
         this.form = form;
         this.prestasjon = prestasjon;

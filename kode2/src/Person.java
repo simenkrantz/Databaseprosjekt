@@ -1,24 +1,30 @@
 public class Person {
 
-    static private int personID = 1;
+    private int personID;
     private String navn = null;
     private int telefonNummer;
     private Ovelse favorittOvelse = null;
 
 
-    public Person(String navn, int telefonNummer, Ovelse favorittOvelse) {
+    public Person(int personID, String navn, int telefonNummer, Ovelse favorittOvelse) {
         this.navn = navn;
         this.telefonNummer = telefonNummer;
         this.favorittOvelse = favorittOvelse;
-        personID += 1;
+        this.personID = personID;
     }
 
-    public Person(String navn) {
+    public Person(int personID, String navn, int telefonNummer) {
         this.navn = navn;
-        personID += 1;
+        this.telefonNummer = telefonNummer;
+        this.personID = personID;
     }
 
-    public String getPersonID() {return this.personID;}
+    public Person(int personID, String navn) {
+        this.navn = navn;
+        this.personID = personID;
+    }
+
+    public int getPersonID() {return this.personID;}
 
     public String getNavn() {return this.navn;}
 

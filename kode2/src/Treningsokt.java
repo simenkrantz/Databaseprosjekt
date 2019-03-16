@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Treningsokt {
-    static private int oktID = 0;
+    private int oktID;
     private java.sql.Date dato;
     private java.sql.Time tidspunkt;
     private int varighet;
@@ -10,20 +10,30 @@ public class Treningsokt {
     private Person partner;
     private List<Ovelse> ovelser;
 
-    public Treningsokt(java.sql.Date dato, java.sql.Time tidspunkt, int varighet) {
-        oktID += 1;
+    public Treningsokt(int oktID, java.sql.Date dato, java.sql.Time tidspunkt, int varighet) {
+        this.oktID = oktID;
         this.dato = dato;
-        this.startTid = tidspunkt;
+        this.tidspunkt = tidspunkt;
         this.varighet = varighet;
         this.notat = "";
         this.partner = null;
         this.ovelser = new ArrayList<Ovelse>();
     }
 
-    public Treningsokt(java.sql.Date dato, java.sql.Time tidspunkt, int varighet, String notat, Person partner) {
-        oktID += 1;
+    public Treningsokt(int oktID, java.sql.Date dato, java.sql.Time tidspunkt, int varighet, String notat) {
+        this.oktID = oktID;
         this.dato = dato;
-        this.startTid = tidspunkt;
+        this.tidspunkt = tidspunkt;
+        this.varighet = varighet;
+        this.notat = notat;
+        this.partner = null;
+        this.ovelser = new ArrayList<Ovelse>();
+    }
+
+    public Treningsokt(int oktID, java.sql.Date dato, java.sql.Time tidspunkt, int varighet, String notat, Person partner) {
+        this.oktID = oktID;
+        this.dato = dato;
+        this.tidspunkt = tidspunkt;
         this.varighet = varighet;
         this.notat = notat;
         this.partner = partner;

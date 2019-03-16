@@ -3,16 +3,16 @@ import java.util.List;
 
 public class Ovelsesgruppe {
 
-    static private int gruppeID = 1;
+    private int gruppeID;
     private String navn = null;
     private List<Ovelse> ovelser = new ArrayList<Ovelse>();
 
-    public Ovelsesgruppe(String navn){
+    public Ovelsesgruppe(int gruppeID, String navn){
+        this.gruppeID = gruppeID;
         this.navn = navn;
-        gruppeID += 1;
     }
 
-    public String getGruppeID() {return this.gruppeID;}
+    public int getGruppeID() {return this.gruppeID;}
 
     public String getNavn() {return this.navn;}
 

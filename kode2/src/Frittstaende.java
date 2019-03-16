@@ -3,13 +3,13 @@ public class Frittstaende extends Ovelse{
 
     private String beskrivelse = null;
 
-    public Frittstaende(String navn, String beskrivelse){
-        super(navn);
+    public Frittstaende(int ovelseID, String navn, String beskrivelse){
+        super(ovelseID, navn);
         this.beskrivelse = beskrivelse;
     }
 
-    public Frittstaende(String navn, int form, int prestasjon, String beskrivelse){
-        super(navn, form, prestasjon);
+    public Frittstaende(int ovelseID, String navn, int form, int prestasjon, String beskrivelse){
+        super(ovelseID, navn, form, prestasjon);
         this.beskrivelse = beskrivelse;
     }
 
