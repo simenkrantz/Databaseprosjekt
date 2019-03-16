@@ -2,11 +2,11 @@ public class Person {
 
     static private int personID = 1;
     private String navn = null;
-    private int telefonNummer = null;
+    private int telefonNummer;
     private Ovelse favorittOvelse = null;
 
 
-    public Person(String navn, String telefonNummer, Ovelse favorittOvelse) {
+    public Person(String navn, int telefonNummer, Ovelse favorittOvelse) {
         this.navn = navn;
         this.telefonNummer = telefonNummer;
         this.favorittOvelse = favorittOvelse;
@@ -25,11 +25,11 @@ public class Person {
     }
 
     public int getTelefonNummer(){
-        return this.telefonNummer
+        return this.telefonNummer;
     }
 
     public Ovelse getFavorittOvelse(){
-        return this.favorittOvelse
+        return this.favorittOvelse;
     }
 
     public void setTelefonNummer(int telefonNummer){

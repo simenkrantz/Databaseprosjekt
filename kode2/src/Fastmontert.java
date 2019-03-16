@@ -1,8 +1,8 @@
 
 public class Fastmontert extends Ovelse {
 
-    private int antallKg = null;
-    private int antallSett = null;
+    private int antallKg;
+    private int antallSett;
     private Apparat apparat;
 
     public Fastmontert(String navn, Apparat apparat){
@@ -17,7 +17,7 @@ public class Fastmontert extends Ovelse {
         this.apparat = apparat;
     }
 
-    public String getAntallKg(){
+    public int getAntallKg(){
         return antallKg;
     }
 
@@ -25,7 +25,7 @@ public class Fastmontert extends Ovelse {
         antallKg = kg;
     }
 
-    public String getAntallSett(){
+    public int getAntallSett(){
         return antallSett;
     }
 
