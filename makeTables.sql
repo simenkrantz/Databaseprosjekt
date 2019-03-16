@@ -1,11 +1,11 @@
 CREATE TABLE Ovelsesgruppe (
-	gruppeID 	INTEGER 	NOT NULL,
+	gruppeID 	INTEGER 	NOT NULL AUTO_INCREMENT,
     navn 		VARCHAR(30) NOT NULL,
     CONSTRAINT gruppe_PK PRIMARY KEY (gruppeID)
 );
 
 CREATE TABLE Ovelse (
-	ovelseID 	INTEGER 	NOT NULL,
+	ovelseID 	INTEGER 	NOT NULL AUTO_INCREMENT,
     navn 		VARCHAR(30) NOT NULL,
     gruppeID 	INTEGER,
     form 			INTEGER,
@@ -17,7 +17,7 @@ CREATE TABLE Ovelse (
 );
 
 CREATE TABLE Person (
-	personID 		INTEGER 	NOT NULL,
+	personID 		INTEGER 	NOT NULL AUTO_INCREMENT,
     navn 			VARCHAR(30) NOT NULL,
     tlfnr 			INTEGER,
     favorittovelse 	INTEGER,
@@ -28,7 +28,7 @@ CREATE TABLE Person (
 );
 
 CREATE TABLE Treningsokt (
-	oktID 			INTEGER NOT NULL,
+	oktID 			INTEGER NOT NULL AUTO_INCREMENT,
     dato 			DATE	NOT NULL,
     tidspunkt 		TIME	NOT NULL,
     varighet 		INTEGER NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE Treningsokt (
 );
 
 CREATE TABLE Apparat (
-	apparatID 	INTEGER 	NOT NULL,
+	apparatID 	INTEGER 	NOT NULL AUTO_INCREMENT,
     navn 		VARCHAR(30) NOT NULL,
     beskrivelse VARCHAR(200),
     CONSTRAINT apparat_PK PRIMARY KEY (apparatID)
