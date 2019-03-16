@@ -1,5 +1,5 @@
 public class Treningsokt {
-    static private int oktID = 1;
+    static private int oktID = 0;
     private java.sql.Date dato;
     private java.sql.Time startTid;
     private int varighet;
@@ -8,7 +8,6 @@ public class Treningsokt {
     private List<Ovelse> ovelser;
 
     public Treningsokt(java.sql.Date dato, java.sql.Time startTid, int varighet) {
-        this.oktID = oktID;
         oktID += 1;
         this.dato = dato;
         this.startTid = startTid;
