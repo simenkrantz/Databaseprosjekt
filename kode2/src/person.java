@@ -1,9 +1,9 @@
 public class Person {
 
-    static private int personID = 0;
-    private String navn;
-    private int telefonNummer;
-    private Ovelse favorittOvelse;
+    static private int personID = 1;
+    private String navn = null;
+    private int telefonNummer = null;
+    private Ovelse favorittOvelse = null;
 
 
     public Person(String navn, String telefonNummer, Ovelse favorittOvelse) {
