@@ -1,45 +1,88 @@
-KLASSER:
+** KLASSER:
 
 Klassene i dette prosjektet består av følgende:
 
-* Apparat
-* DBConn
-* DBOperations
-* Fastmontert
-* Frittstaende
-* Ovelse
-* Ovelsesgruppe
-* Person
-* Treningsokt
+- Apparat
+- DBConn
+- DBOperations
+- Fastmontert
+- Frittstaende
+- Ovelse
+- Ovelsesgruppe
+- Person
+- Treningsokt
 
 
-BESKRIVELSE AV KLASSENE:
+** BESKRIVELSE AV KLASSENE:
 
 * Apparat:
-Klassens oppgave er å holde på informasjon om et apparats respektive apparatID,
-navn og beskrivelse.
+Klassens oppgave er å holde på informasjon om et apparats respektive apparatID, navn og beskrivelse.
 
 * DBConn:
 Klassens oppgave er å opprette en connection med databasen.
 
 * DBOperations:
-Klassens oppgave er å ta hånd om spørringer og behandlingen av
-disse. Dette inkluderer:
+Klassens oppgave er å ta hånd om spørringer og behandlingen av disse. Dette inkluderer:
     - Å legge til apparater, øvelser, øvelsesgrupper og økter.
     - Hente ut informasjon om n siste økter med notater.
     - Vise resultatlogg i et intervall spesifisert av sluttbruker
     - Finne alle øvelser i samme øvelsesgruppe
     - Hente ut alle personer (med navn, tlf.nr. og favorittøvelse)
     som har en gitt favorittøvelse.
+    - Logikk for å gå gjennom tabellene i databasen ved søk etter allerede eksisterende rader,
+    f.eks. en spesifikk økt eller øvelse.
+Det antas i klassen at informasjonen fra konsoll har blitt håndtert riktig av klassen TreningsCtrl.
 
 * Fastmontert:
-Arver fra klassen Ovelse. Klassens oppgave er å holde på informasjon om en
-fastmontert øvelses totale antall kg, sett og tilhørende apparat
+Arver fra klassen Ovelse. Klassens oppgave er å holde på informasjon om en fastmontert øvelses
+totale antall kg, antall gjennomførte sett og tilhørende apparat som brukes.
 
 * Frittstaende:
-Arver fra klassen Ovelse. Klassens oppgave er å holde på informasjon om en
-frittstående øvelses beskrivelse.
+Arver fra klassen Ovelse. Klassens oppgave er å holde på informasjon om en frittstående øvelses beskrivelse.
+
+* Ovelse:
+Superklassen til Fastmontert og Frittstaende. Klassens oppgave er å holde på informasjon om en øvelses
+ID, navn, samt hvilken form og prestasjon utøveren av øvelsen opplevde under gjennomføring.
+
+* Ovelsegruppe:
+Klassens oppgave er å holde på ID og navn en øvelsesgruppe.
+
+* Person:
+Klassens oppgave er å holde på informasjon om en persons ID, navn, telefonnummer og favorittøvelse.
+For en treningsøkt skal man kunne legge til en treningspartner, av typen Person.
+
+* TreningsCtrl:
+Klassens oppgave er å håndtere input fra konsoll på riktig måte, og formatere informasjonen på
+riktig måte før DBOperations interagerer med selve databasen.
+
+* Treningsokt:
+Klassens oppgave er å holde på informasjon om en treningsøkt. Denne informasjonen er ID, dato
+og starttidspunkt for den respektive økten, samt øktens varighet, notat og eventuell treningspartner.
 
 
+** USES CASES - OVERSIKT OG REALISERING
 
-USES CASES - OVERSIKT OG REALISERING
+1. Registrere apparater, øvelser og treningsøkter med tilhørende data.
+	- Registrering av apparater:
+		
+		Legger til et apparat i databasen med funksjonen addApparat() i TreningsCtrl-klassen.
+
+	- Registrering av øvelser:
+		Funksjonen addOvelse() i klassen TreningsCtrl spør i konsollen om navn, form og prestasjon
+		for en øvelse, samt om den respektive øvelsen er fastmonterte eller frittstående. Hvis fastmontert,
+		itereres det over allerede eksisterende apparatIDer i databasen for å matche oppgitt apparatID.
+
+	- Registrering av treningsøkter:
+		HER
+
+2.
+	HER
+
+3.
+	HER
+
+4. Lage øvelsesgrupper og finne øvelser som er i samme gruppe.
+	HER
+
+5. Vårt use case.
+	HER
