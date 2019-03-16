@@ -26,6 +26,7 @@ public class DBOperations {
         }
     }
 
+    
     public static void addFastmontert(Connection conn, Fastmontert ovelse) {
 
         String queryOvelse = "INSERT INTO Ovelse (navn, form, prestasjon) VALUES (?,?,?)";
