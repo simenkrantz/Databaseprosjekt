@@ -28,5 +28,6 @@ public class Apparat {
 
     public void setBeskrivelse(Strimg beskrivelse){
         this.beskrivelse = beskrivelse;
+        
     }
 }
