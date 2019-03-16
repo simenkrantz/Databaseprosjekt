@@ -17,36 +17,48 @@ public class TreningsCtrl extends DBConn {
      }
 
      public void addOvelse() throws SQLException {
-         Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-         System.out.println("Skriv inn navn på øvelse: ");
-         String navn = scanner.nextLine();
+        System.out.println("Skriv inn navn på øvelse: ");
+        String navn = scanner.nextLine();
 
-         System.out.println("Skriv inn form (int): ");
-         int form = Integer.parseInt(scanner.nextLine());
+        System.out.println("Skriv inn form (int): ");
+        int form = Integer.parseInt(scanner.nextLine());
 
-         System.out.println("Skriv inn prestasjon (int): ");
-         int prestasjon = Integer.parseInt(scanner.nextLine());
+        System.out.println("Skriv inn prestasjon (int): ");
+        int prestasjon = Integer.parseInt(scanner.nextLine());
 
-         System.out.println("Fastmontert(1) eller Frittstående(2): ");
-         int type = Integer.parseInt(scanner.nextLine());
-         if (type == 1){
-             System.out.println("Apparater å velge mellom:");
-             DBOperations.printApparater(conn);
-             System.out.println("Skriv inn apparatID: ");
-             int apparatID = Integer.parseInt(scanner.nextLine());
+        System.out.println("Fastmontert(1) eller Frittstående(2): ");
+        int type = Integer.parseInt(scanner.nextLine());
+        
+        if (type == 1){
+            System.out.println("Skriv inn antall kg: ");
+            int antallKg = Integer.parseInt(scanner.nextLine());
+            System.out.println("Skriv inn antall sett: ");
+            int antallSett = Integer.parseInt(scanner.nextLine());
 
-             System.out.println("Skriv inn antall kg: ");
-             int antallKg = Integer.parseInt(scanner.nextLine());
-             System.out.println("Skriv inn antall sett: ");
-             int antallSett = Integer.parseInt(scanner.nextLine());
+            System.out.println("Apparater å velge mellom:");
+            DBOperations.printApparater(conn);
+            System.out.println("Skriv inn apparatID: ");
+            int apparatID = Integer.parseInt(scanner.nextLine());
 
+            bool apparatOK = false;
+            for (Apparat a : DBOperations.getApparater()){
+                if (apparatID == a.getApparatID()){
+                    apparatOK = true;
+                    DBOperations.addFastmontert(conn, navn, form, prestasjon, antallKg, antallSett, a);
+                    break;
+                }
+            }
+            if(!apparatOK){
+                System.out.println("Apparatet finnes ikke")
+            }
+        } else {
+            System.out.println("Skriv inn beskrivelse på øvelse: ");
+            String beskrivelse = scanner.nextLine();
 
-             Ovelse o = new Ovelse(navn);
-             DBOperations.addFastmontert(conn, navn, form, prestasjon, o.getOvelseID(), antallKg, antallSett, apparatID );
-         } else {
-
-         }
+            DBOperations.addFrittstaende(conn, navn, form, prestasjon,)
+        }
 
 
      }

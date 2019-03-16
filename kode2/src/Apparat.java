@@ -1,19 +1,19 @@
 public class Apparat {
 
-    static private int apparatID = 0;
+    private int apparatID;
     private String navn = null;
     private String beskrivelse = null;
 
 
-    public Apparat(String navn, String beskrivelse) {
+    public Apparat(int apparatID, String navn, String beskrivelse) {
+        this.apparatID = apparatID;
         this.navn = navn;
         this.beskrivelse = beskrivelse;
-        apparatID += 1;
     }
 
-    public Apparat(String navn) {
+    public Apparat(int apparatID, String navn) {
+        this.apparatID = apparatID;
         this.navn = navn;
-        apparatID += 1;
     }
 
     public int getApparatID() {
