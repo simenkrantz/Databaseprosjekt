@@ -69,7 +69,7 @@ CREATE TABLE Fastmontert (
 );
 
 CREATE TABLE Ovelseriokt (
-	oktID 		INTEGER NOT NULL AUTO_INCREMENT,
+	oktID 		INTEGER NOT NULL,
     ovelseID 	INTEGER NOT NULL,
     CONSTRAINT ovelseriokt_PK PRIMARY KEY (oktID, ovelseID),
     CONSTRAINT ovelseriokt_FK FOREIGN KEY (ovelseID) REFERENCES Ovelse(ovelseID) 
