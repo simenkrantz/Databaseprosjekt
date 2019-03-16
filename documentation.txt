@@ -1,0 +1,45 @@
+KLASSER:
+
+Klassene i dette prosjektet består av følgende:
+
+* Apparat
+* DBConn
+* DBOperations
+* Fastmontert
+* Frittstaende
+* Ovelse
+* Ovelsesgruppe
+* Person
+* Treningsokt
+
+
+BESKRIVELSE AV KLASSENE:
+
+* Apparat:
+Klassens oppgave er å holde på informasjon om et apparats respektive apparatID,
+navn og beskrivelse.
+
+* DBConn:
+Klassens oppgave er å opprette en connection med databasen.
+
+* DBOperations:
+Klassens oppgave er å ta hånd om spørringer og behandlingen av
+disse. Dette inkluderer:
+    - Å legge til apparater, øvelser, øvelsesgrupper og økter.
+    - Hente ut informasjon om n siste økter med notater.
+    - Vise resultatlogg i et intervall spesifisert av sluttbruker
+    - Finne alle øvelser i samme øvelsesgruppe
+    - Hente ut alle personer (med navn, tlf.nr. og favorittøvelse)
+    som har en gitt favorittøvelse.
+
+* Fastmontert:
+Arver fra klassen Ovelse. Klassens oppgave er å holde på informasjon om en
+fastmontert øvelses totale antall kg, sett og tilhørende apparat
+
+* Frittstaende:
+Arver fra klassen Ovelse. Klassens oppgave er å holde på informasjon om en
+frittstående øvelses beskrivelse.
+
+
+
+USES CASES - OVERSIKT OG REALISERING
