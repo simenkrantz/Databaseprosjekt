@@ -5,10 +5,11 @@ public class Treningsokt {
     private int varighet;
     private String notat;
     private Person partner;
-    private ArrayList<Ovelse> ovelser;
+    private List<Ovelse> ovelser;
 
-    public Treningsokt(String dato, java.sql.Time startTid, int varighet) {
-        this.oktID += 1;
+    public Treningsokt(java.sql.Date dato, java.sql.Time startTid, int varighet) {
+        this.oktID = oktID;
+        oktID += 1;
         this.dato = dato;
         this.startTid = startTid;
         this.varighet = varighet;
@@ -18,7 +19,8 @@ public class Treningsokt {
     }
 
     public Treningsokt(java.sql.Date dato, java.sql.Time startTid, int varighet, String notat, Person partner) {
-        this.oktID += 1;
+        this.oktID = oktID;
+        oktID += 1;
         this.dato = dato;
         this.startTid = startTid;
         this.varighet = varighet;
@@ -27,11 +29,11 @@ public class Treningsokt {
         this.ovelser = new ArrayList<Ovelse>();
     }
 
-    public String getDato() { return dato; }
+    public java.sql.Date getDato() { return dato; }
 
     public void setDato(java.sql.Date dato) { this.dato = dato; }
 
-    public String getStartTid() { return startTid; }
+    public java.sql.Time getStartTid() { return startTid; }
 
     public void setStartTid(java.sql.Time tid) { startTid = tid; }
 
@@ -49,5 +51,5 @@ public class Treningsokt {
 
     public void addOvelse(Ovelse ovelse) { ovelser.add(ovelse); }
 
-    public ArrayList<Ovelse> getOvelser() { return ovelser; }
+    public List<Ovelse> getOvelser() { return ovelser; }
 }
