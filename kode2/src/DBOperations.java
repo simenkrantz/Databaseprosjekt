@@ -34,18 +34,25 @@ public class DBOperations {
 
         try {
             PreparedStatement prepStatOvelse = conn.prepareStatement(queryOvelse);
-            PreparedStatement prepStatFast = conn.prepareStatement(queryFastmontert);
 
             prepStatOvelse.setString(1, navn);
             prepStatOvelse.setInt(2, form);
             prepStatOvelse.setInt(3, prestasjon);
+
+            prepStatOvelse.execute();
+        } catch (Exception e) {
+            throw new RuntimeException("DB error when inserting Ovelse", e);
+        }
+
+        try{
+            PreparedStatement prepStatFast = conn.prepareStatement(queryFastmontert);
+            System.out.println("largest id: " + (getHoyesteOvelseID(conn)));
 
             prepStatFast.setInt(1, getHoyesteOvelseID(conn));
             prepStatFast.setInt(2, antallKg);
             prepStatFast.setInt(3, antallSett);
             prepStatFast.setInt(4, apparat.getApparatID());
 
-            prepStatOvelse.execute();
             prepStatFast.execute();
 
             System.out.println("Fastmontert ovelse lagt til");
@@ -58,20 +65,26 @@ public class DBOperations {
     public static void addFrittstaende(Connection conn, String navn, int form, int prestasjon, String beskrivelse) {
 
         String queryOvelse = "INSERT INTO Ovelse (navn, form, prestasjon) VALUES (?,?,?)";
-        String queryFritt = "INSERT INTO Fastmontert (ovelseID, beskrivelse) VALUES (?,?)";
+        String queryFritt = "INSERT INTO Frittstaende (ovelseID, beskrivelse) VALUES (?,?)";
+
 
         try {
             PreparedStatement prepStatOvelse = conn.prepareStatement(queryOvelse);
-            PreparedStatement prepStatFritt = conn.prepareStatement(queryFritt);
 
             prepStatOvelse.setString(1, navn);
             prepStatOvelse.setInt(2, form);
             prepStatOvelse.setInt(3, prestasjon);
 
+            prepStatOvelse.execute();
+        } catch (Exception e) {
+            throw new RuntimeException("DB error when inserting Ovelse", e);
+        }
+        try {
+            PreparedStatement prepStatFritt = conn.prepareStatement(queryFritt);
+
             prepStatFritt.setInt(1, getHoyesteOvelseID(conn));
             prepStatFritt.setString(2, beskrivelse);
 
-            prepStatOvelse.execute();
             prepStatFritt.execute();
 
             System.out.println("Frittstående ovelse lagt til");
@@ -99,7 +112,7 @@ public class DBOperations {
     public static List<Ovelse> getOvelser(Connection conn) throws SQLException {
         List<Ovelse> ovelser = new ArrayList<Ovelse>();
         
-        String stmt = "select * from Frittstaende";
+        String stmt = "select * from Frittstaende, Ovelse";
         PreparedStatement prepStat = conn.prepareStatement(stmt);
         ResultSet rs = prepStat.executeQuery();
 
@@ -109,7 +122,7 @@ public class DBOperations {
             ovelser.add(o);
         }
 
-        String stmt2 = "select * from Fastmontert";
+        String stmt2 = "select * from Fastmontert, Ovelse";
         PreparedStatement prepStat2 = conn.prepareStatement(stmt2);
         ResultSet rs2 = prepStat2.executeQuery();
 
@@ -126,8 +139,19 @@ public class DBOperations {
     }
 
     public static int getHoyesteOvelseID(Connection conn) throws SQLException {
-        List<Ovelse> ovelser = getOvelser(conn);
-        int storst = 0;
+        List<Ovelse> ovelser = new ArrayList<Ovelse>();
+
+        String stmt = "select * from Ovelse";
+        PreparedStatement prepStat = conn.prepareStatement(stmt);
+        ResultSet rs = prepStat.executeQuery();
+
+        while(rs.next()) {
+            Ovelse o = new Ovelse(rs.getInt("ovelseID"), rs.getString("navn"),
+                    rs.getInt("form"), rs.getInt("prestasjon"));
+            ovelser.add(o);
+        }
+
+        int storst = 1;
         for (Ovelse o : ovelser){
             if (o.getOvelseID() > storst){
                 storst = o.getOvelseID();

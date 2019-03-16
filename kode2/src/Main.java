@@ -7,7 +7,6 @@ public class Main {
 
         TreningsCtrl treningsCtrl = new TreningsCtrl ();
         treningsCtrl.connect();
-        treningsCtrl.addApparat();
         treningsCtrl.addOvelse();
     }
 
