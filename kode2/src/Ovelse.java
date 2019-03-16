@@ -3,8 +3,8 @@ public class Ovelse {
 
     static private int ovelseID = 1;
     private String navn = null;
-    private int form = null;
-    private int prestasjon = null;
+    private int form;
+    private int prestasjon;
 
     public Ovelse(String navn){
         ovelseID += 1;

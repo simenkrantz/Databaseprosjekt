@@ -18,6 +18,6 @@ public class Ovelsesgruppe {
     }
 
     public List<Ovelse> getOvelser(){
-        return this.ovelser
+        return this.ovelser;
     }
 }
