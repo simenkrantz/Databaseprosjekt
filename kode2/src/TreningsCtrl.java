@@ -13,9 +13,9 @@ public class TreningsCtrl extends DBConn {
         String beskrivelse = scanner.nextLine();
 
         DBOperations.addApparat(conn, navn, beskrivelse);
-     }
+    }
 
-     public void addOvelse() throws SQLException {
+    public void addOvelse() throws SQLException {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Skriv inn navn på øvelse: ");
@@ -60,5 +60,73 @@ public class TreningsCtrl extends DBConn {
         }
 
 
-     }
+    }
+
+    public void addTreningsokt () throws SQLException {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Skriv inn dato på økt (YYYY-MM-DD): ");
+        java.sql.Date dato = java.sql.Date.valueOf(scanner.nextLine());
+
+        System.out.println("Skriv inn tidspunkt på økt (HH:MM:SS): ");
+        java.sql.Time tidspunkt = java.sql.Time.valueOf(scanner.nextLine());
+
+        System.out.println("Skriv inn varigheten på økt (int minutter): ");
+        int varighet = Integer.parseInt(scanner.nextLine());
+
+        DBOperations.printPersoner(conn);
+
+        System.out.println("Skriv inn id på treningspartner (-1 hvis ingen): ");
+        int personID = Integer.parseInt(scanner.nextLine());
+
+        System.out.println("Skriv inn notat til økten (1 linje): ");
+        String notat = scanner.nextLine();
+
+        if (personID != -1) {
+            boolean personOK = false;
+            for (Person p : DBOperations.getPersoner(conn)) {
+                if (personID == p.getPersonID()) {
+                    personOK = true;
+                    DBOperations.addTreningsOkt(conn, dato, tidspunkt, varighet, p, notat);
+                    break;
+                }
+            }
+            if (!personOK) {
+                System.out.println("Personen finnes ikke");
+            }
+        } else {
+            DBOperations.addTreningsOkt(conn,dato,tidspunkt,varighet,notat);
+        }
+    }
+
+    public void addPerson() throws SQLException{
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Skriv inn navn: ");
+        String navn = scanner.nextLine();
+
+        System.out.println("Skriv inn telefonnummer: ");
+        int telefonnummer = Integer.parseInt(scanner.nextLine());
+
+        DBOperations.printOvelser(conn);
+
+        System.out.println("Skriv inn id på favorittøvelse (-1 hvis ingen): ");
+        int ovelseID = Integer.parseInt(scanner.nextLine());
+
+        if (ovelseID != -1) {
+            boolean ovelseOK = false;
+            for (Ovelse o : DBOperations.getOvelser(conn)) {
+                if (ovelseID == o.getOvelseID()) {
+                    ovelseOK = true;
+                    DBOperations.addPerson(conn, navn, telefonnummer, o);
+                    break;
+                }
+            }
+            if (!ovelseOK) {
+                System.out.println("Ovelsen finnes ikke");
+            }
+        } else {
+            DBOperations.addPerson(conn, navn, telefonnummer);
+        }
+    }
 }

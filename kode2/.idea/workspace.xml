@@ -4,6 +4,7 @@
     <list default="true" id="1181c822-9b11-45e5-9efd-6a5c170d8765" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/DBOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBOperations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TreningsCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TreningsCtrl.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,14 +15,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DBOperations.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="140" column="17" selection-start-line="140" selection-start-column="11" selection-end-line="140" selection-end-column="17" />
+            <state relative-caret-position="110">
+              <caret line="255" column="67" selection-start-line="255" selection-start-column="67" selection-end-line="255" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#addApparat#0;class#DBOperations#0" />
+                <element signature="method#addPerson#0;class#DBOperations#0" />
+                <element signature="method#addFastmontert#0;class#DBOperations#0" />
+                <element signature="method#addFrittstaende#0;class#DBOperations#0" />
+                <element signature="method#addTreningsOkt#0;class#DBOperations#0" />
+                <element signature="method#addTreningsOkt#1;class#DBOperations#0" />
+                <element signature="method#getApparater#0;class#DBOperations#0" />
+                <element signature="method#getOvelser#0;class#DBOperations#0" />
+                <element signature="method#getHoyesteOvelseID#0;class#DBOperations#0" />
+                <element signature="method#getTreningsOkter#0;class#DBOperations#0" />
                 <element signature="e#5103#5116#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/TreningsCtrl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="211">
+              <caret line="128" column="60" selection-start-line="128" selection-start-column="60" selection-end-line="128" selection-end-column="60" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#addApparat#0;class#TreningsCtrl#0" />
+                <element signature="method#addOvelse#0;class#TreningsCtrl#0" />
               </folding>
             </state>
           </provider>
@@ -48,7 +73,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
@@ -67,40 +92,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/TreningsCtrl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-17">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/DBOpOKTSKK.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="39" column="41" selection-start-line="39" selection-start-column="41" selection-end-line="39" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/oj_mekker_ctrl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/oj_mekker.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="15" column="59" selection-start-line="15" selection-start-column="59" selection-end-line="15" selection-end-column="59" />
+            <state relative-caret-position="51">
+              <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="16" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -143,10 +138,10 @@
         <option value="$PROJECT_DIR$/src/oj_mekker.java" />
         <option value="$PROJECT_DIR$/src/oj_mekker_ctrl.java" />
         <option value="$PROJECT_DIR$/src/Treningsokt.java" />
-        <option value="$PROJECT_DIR$/src/TreningsCtrl.java" />
         <option value="$PROJECT_DIR$/src/Ovelsesgruppe.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/TreningsCtrl.java" />
         <option value="$PROJECT_DIR$/src/DBOperations.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
       </list>
     </option>
   </component>
@@ -185,7 +180,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552763590821" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552766659128" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/mysql-connector-java-8.0.15/mysql-connector-java-8.0.15/mysql-connector-java-8.0.15.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -234,16 +229,15 @@
       <workItem from="1552726023907" duration="137000" />
       <workItem from="1552739681110" duration="5168000" />
       <workItem from="1552745910299" duration="5350000" />
-      <workItem from="1552757804101" duration="5385000" />
+      <workItem from="1552757804101" duration="8579000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16040000" />
+    <option name="totallyTimeSpent" value="19234000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16356276" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -264,7 +258,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Messages" order="12" visible="true" weight="0.3285968" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.3285968" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -308,62 +302,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DBOpOKTSKK.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="39" column="41" selection-start-line="39" selection-start-column="41" selection-end-line="39" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/oj_mekker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="15" column="59" selection-start-line="15" selection-start-column="59" selection-end-line="15" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Person.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="33" lean-forward="true" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/oj_mekker_ctrl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Treningsokt.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-68">
           <caret line="35" column="22" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Frittstaende.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TreningsCtrl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -380,14 +322,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DBOperations.java">
+    <entry file="file://$PROJECT_DIR$/src/Frittstaende.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DBOpOKTSKK.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="13" column="61" lean-forward="true" selection-start-line="13" selection-start-column="61" selection-end-line="13" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Person.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="33" lean-forward="true" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/oj_mekker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="296">
-          <caret line="140" column="17" selection-start-line="140" selection-start-column="11" selection-end-line="140" selection-end-column="17" />
+          <caret line="25" column="5" lean-forward="true" selection-start-line="5" selection-start-column="4" selection-end-line="25" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/oj_mekker_ctrl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="16" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TreningsCtrl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="128" column="60" selection-start-line="128" selection-start-column="60" selection-end-line="128" selection-end-column="60" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#addApparat#0;class#TreningsCtrl#0" />
+            <element signature="method#addOvelse#0;class#TreningsCtrl#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DBOperations.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="255" column="67" selection-start-line="255" selection-start-column="67" selection-end-line="255" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#addApparat#0;class#DBOperations#0" />
+            <element signature="method#addPerson#0;class#DBOperations#0" />
+            <element signature="method#addFastmontert#0;class#DBOperations#0" />
+            <element signature="method#addFrittstaende#0;class#DBOperations#0" />
+            <element signature="method#addTreningsOkt#0;class#DBOperations#0" />
+            <element signature="method#addTreningsOkt#1;class#DBOperations#0" />
+            <element signature="method#getApparater#0;class#DBOperations#0" />
+            <element signature="method#getOvelser#0;class#DBOperations#0" />
+            <element signature="method#getHoyesteOvelseID#0;class#DBOperations#0" />
+            <element signature="method#getTreningsOkter#0;class#DBOperations#0" />
             <element signature="e#5103#5116#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
         </state>
       </provider>
     </entry>

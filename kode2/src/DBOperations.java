@@ -25,7 +25,45 @@ public class DBOperations {
         }
     }
 
-    
+    public static void addPerson(Connection conn, String navn, int telefonnummer, Ovelse favorittOvelse) {
+
+        String query = "INSERT INTO Person (navn, tlfnr, favorittovelse) VALUES (?,?,?)";
+
+        try {
+            PreparedStatement prepStat = conn.prepareStatement(query);
+
+            prepStat.setString(1, navn);
+            prepStat.setInt(2, telefonnummer);
+            prepStat.setInt(3, favorittOvelse.getOvelseID());
+
+            prepStat.execute();
+
+            System.out.println("Person lagt til");
+
+        } catch (Exception e) {
+            throw new RuntimeException("DB error when inserting Person", e);
+        }
+    }
+
+    public static void addPerson(Connection conn, String navn, int telefonnummer) {
+
+        String query = "INSERT INTO Person (navn, tlfnr) VALUES (?,?)";
+
+        try {
+            PreparedStatement prepStat = conn.prepareStatement(query);
+
+            prepStat.setString(1, navn);
+            prepStat.setInt(2, telefonnummer);
+
+            prepStat.execute();
+
+            System.out.println("Person lagt til uten favorittøvelse");
+
+        } catch (Exception e) {
+            throw new RuntimeException("DB error when inserting Person", e);
+        }
+    }
+
     public static void addFastmontert(Connection conn, String navn, int form, int prestasjon, int antallKg, int antallSett, Apparat apparat) {
 
         String queryOvelse = "INSERT INTO Ovelse (navn, form, prestasjon) VALUES (?,?,?)";
@@ -94,6 +132,52 @@ public class DBOperations {
         }
     }
 
+    public static void addTreningsOkt(Connection conn, java.sql.Date dato, java.sql.Time tidspunkt, int varighet, Person partner, String notat) {
+
+        String query = "INSERT INTO Treningsokt(dato, tidspunkt,varighet,treningspartner,notat) VALUES (?,?,?,?,?)";
+
+        try {
+            PreparedStatement prepStat = conn.prepareStatement(query);
+
+            prepStat.setDate(1, dato);
+            prepStat.setTime(2, tidspunkt);
+            prepStat.setInt(3, varighet);
+            prepStat.setInt(4, partner.getPersonID());
+            prepStat.setString(5, notat);
+
+            prepStat.execute();
+
+            System.out.println("Økt lagt til.");
+
+        }
+        catch (Exception e) {
+            throw new RuntimeException("Error ved inserting av økt", e);
+        }
+    }
+
+    public static void addTreningsOkt(Connection conn, java.sql.Date dato, java.sql.Time tidspunkt, int varighet, String notat) {
+
+        String query = "INSERT INTO Treningsokt(dato, tidspunkt,varighet,notat) VALUES (?,?,?,?)";
+
+        try {
+            PreparedStatement prepStat = conn.prepareStatement(query);
+
+            prepStat.setDate(1, dato);
+            prepStat.setTime(2, tidspunkt);
+            prepStat.setInt(3, varighet);
+            prepStat.setString(4, notat);
+
+            prepStat.execute();
+
+            System.out.println("Økt lagt til uten treningspartner.");
+
+        }
+        catch (Exception e) {
+            throw new RuntimeException("Error ved inserting av økt", e);
+        }
+    }
+
+
     public static List<Apparat> getApparater(Connection conn) throws SQLException{
         List<Apparat> apparater = new ArrayList<>();
 
@@ -107,7 +191,6 @@ public class DBOperations {
         }
         return apparater;
     }
-
 
     public static List<Ovelse> getOvelser(Connection conn) throws SQLException {
         List<Ovelse> ovelser = new ArrayList<Ovelse>();
@@ -160,7 +243,6 @@ public class DBOperations {
         return storst;
     }
 
-
     public static List<Person> getPersoner(Connection conn) throws SQLException {
         List<Person> personer = new ArrayList<Person>();
         
@@ -169,9 +251,9 @@ public class DBOperations {
         ResultSet rs = prepStat.executeQuery();
 
         while(rs.next()) {
-            if (rs.getObject("ovelseID") != null){
+            if (rs.getObject("favorittovelse") != null){
                 for (Ovelse o : getOvelser(conn)){
-                    if(o.getOvelseID() == rs.getInt("ovelseID")){
+                    if(o.getOvelseID() == rs.getInt("favorittovelse")){
                         Person p = new Person(rs.getInt("personID"), rs.getString("navn"), rs.getInt("tlfnr"), o);
                         personer.add(p);
                     }
@@ -217,6 +299,26 @@ public class DBOperations {
 
         while(rs.next()){
             System.out.println("ID: " + rs.getInt("apparatID") + ", navn: " + rs.getString("navn"));
+        }
+    }
+
+    public static void printPersoner(Connection conn) throws  SQLException {
+        String queryStatement = "SELECT * FROM Person";
+        PreparedStatement prepStat = conn.prepareStatement(queryStatement);
+        ResultSet rs = prepStat.executeQuery();
+
+        while(rs.next()){
+            System.out.println("ID: " + rs.getInt("personID") + ", navn: " + rs.getString("navn"));
+        }
+    }
+
+    public static void printOvelser(Connection conn) throws SQLException{
+        String queryStatement = "SELECT * FROM Ovelse";
+        PreparedStatement prepStat = conn.prepareStatement(queryStatement);
+        ResultSet rs = prepStat.executeQuery();
+
+        while(rs.next()){
+            System.out.println("ID: " + rs.getInt("ovelseID") + ", navn: " + rs.getString("navn"));
         }
     }
 }
