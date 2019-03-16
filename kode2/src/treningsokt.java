@@ -6,29 +6,61 @@ public class Treningsokt {
     private String notat;
     private Person partner;
 
-    public Treningsokt(String dato, String startTid, int varighet, String notat) {
-        oktID += 1;
-        this.date = dato;
+    public Treningsokt(String dato, String startTid, int varighet) {
+        this.oktID += 1;
+        this.dato = dato;
         this.startTid = startTid;
         this.varighet = varighet;
-        this.notat = notat;
+        this.notat = "";
         this.partner = null;
     }
 
     public Treningsokt(String dato, String startTid, int varighet, String notat, Person partner) {
-        oktID += 1;
-        this.dato = date;
+        this.oktID += 1;
+        this.dato = dato;
         this.startTid = startTid;
         this.varighet = varighet;
         this.notat = notat;
         this.partner = partner;
     }
 
-    public String getDate() {
+    public String getDato() {
         return dato;
     }
 
-    public void setDate(String dato) {
-        
+    public void setDato(String dato) {
+        this.dato = dato;
+    }
+
+    public String getStartTid() {
+        return startTid;
+    }
+
+    public void setStartTid(String tid) {
+        startTid = tid;
+    }
+
+    public int getVarighet() {
+        return startTid;
+    }
+
+    public void setVarighet(int minutter) {
+        varighet = minutter;
+    }
+
+    public String getNotat() {
+        return notat;
+    }
+
+    public void setNotat(String notat) {
+        this.notat = notat;
+    }
+
+    public Person getPartner() {
+        return partner;
+    }
+
+    public void setPartner(Person partner) {
+        this.partner = partner;
     }
 }
