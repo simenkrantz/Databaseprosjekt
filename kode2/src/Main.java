@@ -48,6 +48,9 @@ public class Main {
                 case 10:
                     treningsCtrl.printOvelserITreningsokt();
                     break;
+                case 11:
+                    treningsCtrl.printTreningsokterOvelseErI();
+                    break;
                 default:
                     System.out.println("Ikke et valg, velg igjen");
             }
@@ -70,6 +73,7 @@ public class Main {
         System.out.println("8: Skriv ut Personer");
         System.out.println("9: Skriv ut Treningsøkter");
         System.out.println("10: Skriv ut hvilke Øvelser som er i Treningsøkt");
+        System.out.println("11: Skriv ut logg for en øvelse");
 
     }
 

@@ -332,6 +332,26 @@ public class DBOperations {
         return ovelseriokt;
     }
 
+    public static List<Treningsokt> getTreningsokterOvelseErI(Connection conn, Ovelse ovelse) throws  SQLException {
+        List<Treningsokt> okter = new ArrayList<Treningsokt>();
+
+        String stmt = "select * from Ovelseriokt";
+        PreparedStatement prepStat = conn.prepareStatement(stmt);
+        ResultSet rs = prepStat.executeQuery();
+
+        while(rs.next()) {
+            if (rs.getInt("ovelseID") == ovelse.getOvelseID()) {
+                for (Treningsokt t : getTreningsOkter(conn)) {
+                    if (rs.getInt("oktID") == t.getOktID()){
+                        okter.add(t);
+                    }
+                }
+            }
+        }
+
+        return okter;
+    }
+
 
 
     public static void printApparater(Connection conn) throws SQLException{
@@ -365,13 +385,26 @@ public class DBOperations {
     }
 
     public  static void printTreningsokter(Connection conn) throws SQLException {
+
+        List<Treningsokt> oktList = getTreningsOkter(conn);
+
+        for (Treningsokt t : oktList){
+            if (t.getPartner() != null){
+                System.out.println("ID: " + t.getOktID() + ", dato: " + t.getDato()+ ", tidspunkt: " + t.getTidspunkt() +
+                        " treningspartner: " + t.getPartner().getNavn());
+            }
+            else{
+                System.out.println("ID: " + t.getOktID() + ", dato: " + t.getDato()+ ", tidspunkt: " + t.getTidspunkt());
+            }
+        }
+        /*
         String queryStatement = "SELECT * FROM Treningsokt";
         PreparedStatement prepStat = conn.prepareStatement(queryStatement);
         ResultSet rs = prepStat.executeQuery();
 
         while(rs.next()){
-            System.out.println("ID: " + rs.getInt("oktID") +
-                    ", dato: " + rs.getString("dato")+", tidspunkt: " + rs.getString("tidspunkt"));
-        }
+            System.out.println("ID: " + rs.getInt("oktID") + ", dato: " + rs.getString("dato")+
+                    ", tidspunkt: " + rs.getString("tidspunkt"));
+        }*/
     }
 }

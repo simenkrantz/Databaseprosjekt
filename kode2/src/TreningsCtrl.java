@@ -198,4 +198,24 @@ public class TreningsCtrl extends DBConn {
             }
         }
     }
+
+    public void printTreningsokterOvelseErI() throws SQLException {
+        Scanner scanner = new Scanner(System.in);
+
+        printOvelser();
+
+        System.out.println("Skriv inn id på Øvelsen du vil se logg for: ");
+        int ovelseID = Integer.parseInt(scanner.nextLine());
+
+        for (Ovelse o : DBOperations.getOvelser(conn)){
+            if (ovelseID == o.getOvelseID()){
+                List<Treningsokt> oktList = DBOperations.getTreningsokterOvelseErI(conn,o);
+                for (Treningsokt t : oktList) {
+                    System.out.println("ID: " + t.getOktID() + " dato: " + t.getDato() +
+                            " tidspunkt: " + t.getTidspunkt() + " treningspartner: " + t.getPartner().getNavn());
+                }
+                break;
+            }
+        }
+    }
 }
