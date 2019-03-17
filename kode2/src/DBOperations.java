@@ -214,7 +214,7 @@ public class DBOperations {
     public static List<Ovelse> getOvelser(Connection conn) throws SQLException {
         List<Ovelse> ovelser = new ArrayList<Ovelse>();
         
-        String stmt = "select * from Frittstaende, Ovelse";
+        String stmt = "SELECT * FROM Frittstaende NATURAL JOIN Ovelse";
         PreparedStatement prepStat = conn.prepareStatement(stmt);
         ResultSet rs = prepStat.executeQuery();
 
@@ -224,7 +224,7 @@ public class DBOperations {
             ovelser.add(o);
         }
 
-        String stmt2 = "select * from Fastmontert, Ovelse";
+        String stmt2 = "SELECT * FROM Fastmontert NATURAL JOIN Ovelse";
         PreparedStatement prepStat2 = conn.prepareStatement(stmt2);
         ResultSet rs2 = prepStat2.executeQuery();
 
@@ -311,6 +311,28 @@ public class DBOperations {
         
         return treningsOkter;
 }
+
+    public static List<Ovelse> getOvelserITreningsokt(Connection conn, Treningsokt okt) throws SQLException {
+        List<Ovelse> ovelseriokt = new ArrayList<Ovelse>();
+
+        String stmt = "select * from Ovelseriokt";
+        PreparedStatement prepStat = conn.prepareStatement(stmt);
+        ResultSet rs = prepStat.executeQuery();
+
+        while(rs.next()) {
+            if (rs.getInt("oktID") == okt.getOktID()) {
+                for (Ovelse o : getOvelser(conn)) {
+                    if (rs.getInt("ovelseID") == o.getOvelseID()){
+                        ovelseriokt.add(o);
+                    }
+                }
+            }
+        }
+
+        return ovelseriokt;
+    }
+
+
 
     public static void printApparater(Connection conn) throws SQLException{
         String queryStatement = "SELECT * FROM Apparat";

@@ -1,6 +1,8 @@
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TreningsCtrl extends DBConn {
     public void addApparat() {
@@ -161,7 +163,39 @@ public class TreningsCtrl extends DBConn {
         }
     }
 
+
     public void printApparater() throws SQLException {
         DBOperations.printApparater(conn);
+    }
+
+    public void printOvelser() throws SQLException {
+        DBOperations.printOvelser(conn);
+    }
+
+    public void printPersoner() throws SQLException {
+        DBOperations.printPersoner(conn);
+    }
+
+    public void printTreningsokter() throws SQLException {
+        DBOperations.printTreningsokter(conn);
+    }
+
+    public void printOvelserITreningsokt() throws SQLException {
+        Scanner scanner = new Scanner(System.in);
+
+        printTreningsokter();
+
+        System.out.println("Skriv inn id på Treningsøkten du vil se øvelsene til: ");
+        int oktID = Integer.parseInt(scanner.nextLine());
+
+        for (Treningsokt t : DBOperations.getTreningsOkter(conn)){
+            if (oktID == t.getOktID()){
+                List<Ovelse> ovelseList = DBOperations.getOvelserITreningsokt(conn,t);
+                for (Ovelse o : ovelseList) {
+                    System.out.println("ID: " + o.getOvelseID() + " navn: " + o.getNavn());
+                }
+                break;
+            }
+        }
     }
 }

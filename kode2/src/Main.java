@@ -6,9 +6,10 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Hello, treningsdagbok");
-
+        System.out.println("Kobler til Database...");
         TreningsCtrl treningsCtrl = new TreningsCtrl ();
         treningsCtrl.connect();
+        System.out.println("Tilkobling vellykket!");
 
         printMenu();
         int valg = Integer.parseInt(scanner.nextLine());
@@ -36,12 +37,16 @@ public class Main {
                     treningsCtrl.printApparater();
                     break;
                 case 7:
+                    treningsCtrl.printOvelser();
                     break;
                 case 8:
+                    treningsCtrl.printPersoner();
                     break;
                 case 9:
+                    treningsCtrl.printTreningsokter();
                     break;
                 case 10:
+                    treningsCtrl.printOvelserITreningsokt();
                     break;
                 default:
                     System.out.println("Ikke et valg, velg igjen");
