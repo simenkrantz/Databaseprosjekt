@@ -240,8 +240,13 @@ public class TreningsCtrl extends DBConn {
             if (ovelseID == o.getOvelseID()){
                 List<Treningsokt> oktList = DBOperations.getTreningsokterOvelseErI(conn,o);
                 for (Treningsokt t : oktList) {
-                    System.out.println("ID: " + t.getOktID() + " dato: " + t.getDato() +
-                            " tidspunkt: " + t.getTidspunkt() + " treningspartner: " + t.getPartner().getNavn());
+                    if (t.getPartner() != null) {
+                        System.out.println("ID: " + t.getOktID() + " dato: " + t.getDato() +
+                                " tidspunkt: " + t.getTidspunkt() + " treningspartner: " + t.getPartner().getNavn());
+                    } else {
+                        System.out.println("ID: " + t.getOktID() + " dato: " + t.getDato() +
+                                " tidspunkt: " + t.getTidspunkt());
+                    }
                 }
                 break;
             }

@@ -255,7 +255,7 @@ public class DBOperations {
             for(Apparat a : getApparater(conn)){
                 if (a.getApparatID() == rs2.getInt("apparat")){
                     for (Ovelsesgruppe g : getOvelsesgrupper(conn)) {
-                        if (rs.getInt("gruppeID") == g.getGruppeID()) {
+                        if (rs2.getInt("gruppeID") == g.getGruppeID()) {
                             Ovelse o = new Fastmontert(rs2.getInt("ovelseID"), rs2.getString("navn"),g,
                                     rs2.getInt("antall_kg"), rs2.getInt("antall_sett"), a);
                             ovelser.add(o);
