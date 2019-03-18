@@ -32,4 +32,4 @@ INSERT INTO Treningsokt VALUES ('2019-03-02', '13:08:00', 60, 9, 7,NULL,'OK'),
 ('2016-10-14','14:45:32',14,1,2,2,'Nøtternte å løpe bakkeløp i hasjrus'),('20119-03-01','23:14:09',44,8,9,NULL,'OK');
 
 -- ØktID, ØvelseID
-INSERT INTO Ovelseriokt VALUES (1,1),(1,3),(1,5),(2,3),(),(),(),(),(),(),(),();
+INSERT INTO Ovelseriokt VALUES (1,1),(1,3),(1,5),(2,2),(2,3),(3,1),(3,2),(3,3);
