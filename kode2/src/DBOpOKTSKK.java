@@ -34,17 +34,15 @@ public class DBOpOKTSKK {
     public void getLastWorkoutNotes(Connection conn) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Skriv inn antall [int] siste treningsøkter: ");
-        String temp = sc.nextLine();
-
-        int num = Integer.parseInt(temp);
+        System.out.println("Skriv inn antall [int,1-index] siste treningsøkter: ");
+        int num = Integer.parseInt(sc.nextLine());
 
         String query = "SELECT notat FROM Treningsokt";
 
         try {
             PreparedStatement prepStat = conn.prepareStatement(query);
             ResultSet rs = prepStat.executeQuery();
-            int numOfRows = 0;
+            int numOfRows = 1;
             while(rs.next()) {
                 if(numOfRows > num) {
                     return;
@@ -53,6 +51,7 @@ public class DBOpOKTSKK {
                 System.out.println(notat + "\n");
                 numOfRows += 1;
             }
+            System.out.println(numOfRows + " siste treningsøkter vist");
         }
         catch (Exception e) {
             throw new RuntimeException("Error ved innlesning av siste n økt", e);
