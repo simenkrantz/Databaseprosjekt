@@ -1,4 +1,4 @@
-** KLASSER:
+** KLASSER ****************************************************************************************************************
 
 Klassene i dette prosjektet består av følgende:
 
@@ -13,7 +13,18 @@ Klassene i dette prosjektet består av følgende:
 - Treningsokt
 
 
-** BESKRIVELSE AV KLASSENE:
+** ANTAGELSER **************************************************************************************************************
+
+- Man kan gjennomføre maks en treningsøkt per dato. Dette er aktuelt for use case 2: Hvis man la inn to økter i løpet av
+  samme dato, kunne man risikere å få frem informasjon om kun av dem.
+- En øvelse må være i en øvelsesgruppe.
+- Man kan ikke legge inn samme øvelse to ganger i løpet av en økt. Dette vil i så fall føre til duplikate primærnøkler.
+- Attributtene 'Prestasjon' og 'Form' gjelder for en hel økt. En enkeltøvelse inneholder ikke denne informasjonen.
+- Attributten 'Treningspartner' for en Treningsøkt kan være NULL eller inneholde en personID. Antas dermed at man kan ha
+  maks en partner per treningsøkt. 
+
+
+** BESKRIVELSE AV KLASSENE *************************************************************************************************
 
 * Apparat:
 Klassens oppgave er å holde på informasjon om et apparats respektive apparatID, navn og beskrivelse.
@@ -60,7 +71,7 @@ Klassens oppgave er å holde på informasjon om en treningsøkt. Denne informasj
 og starttidspunkt for den respektive økten, samt øktens varighet, notat og eventuell treningspartner.
 
 
-** USES CASES - OVERSIKT OG REALISERING
+** USES CASES - OVERSIKT OG REALISERING ***********************************************************************************
 
 1. Registrere apparater, øvelser og treningsøkter med tilhørende data.
 	- Registrering av apparater:

@@ -5,9 +5,9 @@ CREATE TABLE Ovelsesgruppe (
 );
 
 CREATE TABLE Ovelse (
-	ovelseID 	INTEGER 	NOT NULL AUTO_INCREMENT,
+    ovelseID 	INTEGER 	NOT NULL AUTO_INCREMENT,
     navn 		VARCHAR(30) NOT NULL,
-    gruppeID 	INTEGER,
+    gruppeID 	INTEGER NOT NULL,
     CONSTRAINT ovelse_PK PRIMARY KEY (ovelseID),
     CONSTRAINT ovelsesgruppe_FK FOREIGN KEY (gruppeID) REFERENCES Ovelsesgruppe(gruppeID)
 													   ON UPDATE CASCADE
@@ -17,8 +17,8 @@ CREATE TABLE Ovelse (
 CREATE TABLE Person (
 	personID 		INTEGER 	NOT NULL AUTO_INCREMENT,
     navn 			VARCHAR(30) NOT NULL,
-    tlfnr 			INTEGER,
-    favorittovelse 	INTEGER,
+    tlfnr 			INTEGER NOT NULL,
+    favorittovelse 	INTEGER NOT NULL,
     CONSTRAINT person_PK PRIMARY KEY (personID),
     CONSTRAINT ovelse_FK FOREIGN KEY (favorittovelse) REFERENCES Ovelse(ovelseID)
 													  ON UPDATE CASCADE
@@ -30,8 +30,8 @@ CREATE TABLE Treningsokt (
     dato 			DATE	NOT NULL,
     tidspunkt 		TIME	NOT NULL,
     varighet 		INTEGER NOT NULL,
-    form 			INTEGER,
-    prestasjon 		INTEGER,
+    form 			INTEGER NOT NULL,
+    prestasjon 		INTEGER NOT NULL,
     treningspartner INTEGER,
     notat 			VARCHAR(250),
     CONSTRAINT treningsokt_PK PRIMARY KEY (oktID),
@@ -43,13 +43,13 @@ CREATE TABLE Treningsokt (
 CREATE TABLE Apparat (
 	apparatID 	INTEGER 	NOT NULL AUTO_INCREMENT,
     navn 		VARCHAR(30) NOT NULL,
-    beskrivelse VARCHAR(200),
+    beskrivelse VARCHAR(200) NOT NULL,
     CONSTRAINT apparat_PK PRIMARY KEY (apparatID)
 );
 
 CREATE TABLE Frittstaende (
 	ovelseID 	INTEGER NOT NULL,
-    beskrivelse VARCHAR(200),
+    beskrivelse VARCHAR(200) NOT NULL,
 	CONSTRAINT frittstaende_FK FOREIGN KEY (ovelseID) REFERENCES Ovelse(ovelseID)
 												      ON UPDATE CASCADE
                                                       ON DELETE CASCADE
@@ -57,8 +57,8 @@ CREATE TABLE Frittstaende (
 
 CREATE TABLE Fastmontert (
 	ovelseID 	INTEGER NOT NULL,
-    antall_kg 	INTEGER,
-    antall_sett INTEGER,
+    antall_kg 	INTEGER NOT NULL,
+    antall_sett INTEGER NOT NULL,
     apparat 	INTEGER NOT NULL,
     CONSTRAINT fastmontert_FK FOREIGN KEY (ovelseID) REFERENCES Ovelse(ovelseID)
 												     ON UPDATE CASCADE
