@@ -64,8 +64,8 @@ og starttidspunkt for den respektive økten, samt øktens varighet, notat og eve
 
 1. Registrere apparater, øvelser og treningsøkter med tilhørende data.
 	- Registrering av apparater:
-		
-		Legger til et apparat i databasen med funksjonen addApparat() i TreningsCtrl-klassen.
+		Funksjonen addApparat() i klassen TreningsCtrl spør om navn og beskrivelse på et apparat.
+		Dette blir lagt direkte inn i databasen.
 
 	- Registrering av øvelser:
 		Funksjonen addOvelse() i klassen TreningsCtrl spør i konsollen om navn, form og prestasjon
@@ -73,9 +73,11 @@ og starttidspunkt for den respektive økten, samt øktens varighet, notat og eve
 		itereres det over allerede eksisterende apparatIDer i databasen for å matche oppgitt apparatID.
 
 	- Registrering av treningsøkter:
-		HER
+		Funksjonen addTreningsokt() spør om dato, tidspunkt,varighet, evt ID på treningspartner samt
+		notatet for økten. Dette blir lagt direkte inn i databasen av funksjonene addTreningsokt i DBOperations,
+		som har to implementasjoner: en med og en uten treningspartner.
 
-2.
+2. Få informasjon om n siste øvelser med notater, n spesifisert av bruker.
 	HER
 
 3.
