@@ -219,4 +219,23 @@ public class TreningsCtrl extends DBConn {
             }
         }
     }
+
+    public void printNSisteTreningsokter() throws SQLException {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Skriv inn antall [int,1-index] siste treningsøkter: ");
+        int num = Integer.parseInt(sc.nextLine());
+
+        for (Treningsokt t : DBOperations.getNSisteTreningsokter(conn, num)){
+            if (t.getPartner() != null){
+                System.out.println("ID: " + t.getOktID() + ", dato: " + t.getDato()+ ", tidspunkt: " + t.getTidspunkt() +
+                        ", varighet: " + t.getVarighet() + ", form: " + t.getForm()+ ", prestasjon: " + t.getPrestasjon() +
+                        " treningspartner: " + t.getPartner().getNavn()+ ", notat: " + t.getNotat());
+            }
+            else{
+                System.out.println("ID: " + t.getOktID() + ", dato: " + t.getDato()+ ", tidspunkt: " + t.getTidspunkt() +
+                        ", varighet: " + t.getVarighet() + ", form: " + t.getForm()+ ", prestasjon: " + t.getPrestasjon() +
+                        ", notat: " + t.getNotat());
+            }
+        }
+    }
 }

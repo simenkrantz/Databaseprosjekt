@@ -2,6 +2,7 @@ import java.sql.*;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class DBOperations {
 
@@ -66,7 +67,7 @@ public class DBOperations {
 
     public static void addFastmontert(Connection conn, String navn, int antallKg, int antallSett, Apparat apparat) {
 
-        String queryOvelse = "INSERT INTO Ovelse (navn, form, prestasjon) VALUES (?)";
+        String queryOvelse = "INSERT INTO Ovelse (navn) VALUES (?)";
         String queryFastmontert = "INSERT INTO Fastmontert (ovelseID, antall_kg, antall_sett, apparat) VALUES (?,?,?,?)";
         
 
@@ -155,7 +156,7 @@ public class DBOperations {
 
     public static void addTreningsokt(Connection conn, java.sql.Date dato, java.sql.Time tidspunkt, int varighet,int form, int prestasjon, String notat) {
 
-        String query = "INSERT INTO Treningsokt(dato, tidspunkt,varighet,form,prestasjon, notat) VALUES (?,?,?,?,?,?,?)";
+        String query = "INSERT INTO Treningsokt(dato, tidspunkt,varighet,form,prestasjon, notat) VALUES (?,?,?,?,?,?)";
 
         try {
             PreparedStatement prepStat = conn.prepareStatement(query);
@@ -165,7 +166,7 @@ public class DBOperations {
             prepStat.setInt(3, varighet);
             prepStat.setInt(4, form);
             prepStat.setInt(5,prestasjon);
-            prepStat.setString(7, notat);
+            prepStat.setString(6, notat);
 
             prepStat.execute();
 
@@ -350,7 +351,33 @@ public class DBOperations {
         return okter;
     }
 
+    public static List<Treningsokt> getNSisteTreningsokter(Connection conn, int num) throws SQLException{
+        List<Treningsokt> treningsOkter = new ArrayList<Treningsokt>();
 
+        String stmt = "select * from Treningsokt ORDER BY dato DESC";
+        PreparedStatement prepStat = conn.prepareStatement(stmt);
+        ResultSet rs = prepStat.executeQuery();
+
+        int n = 0;
+        while(rs.next() && n < num) {
+            if (rs.getObject("treningspartner") != null){
+                for (Person p : getPersoner(conn)){
+                    if (rs.getInt("treningspartner") == p.getPersonID()){
+                        Treningsokt t = new Treningsokt(rs.getInt("oktID") , rs.getDate("dato"), rs.getTime("tidspunkt"),
+                                rs.getInt("varighet"), rs.getInt("form"), rs.getInt("prestasjon"), rs.getString("notat"), p);
+                        treningsOkter.add(t);
+                    }
+                }
+            } else {
+                Treningsokt t = new Treningsokt(rs.getInt("oktID") , rs.getDate("dato"), rs.getTime("tidspunkt"),
+                        rs.getInt("varighet"), rs.getInt("form"), rs.getInt("prestasjon"), rs.getString("notat"));
+                treningsOkter.add(t);
+            }
+            n += 1;
+        }
+
+        return treningsOkter;
+    }
 
     public static void printApparater(Connection conn) throws SQLException{
         String queryStatement = "SELECT * FROM Apparat";
