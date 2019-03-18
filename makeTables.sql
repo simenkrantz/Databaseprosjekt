@@ -8,8 +8,6 @@ CREATE TABLE Ovelse (
 	ovelseID 	INTEGER 	NOT NULL AUTO_INCREMENT,
     navn 		VARCHAR(30) NOT NULL,
     gruppeID 	INTEGER,
-    form 			INTEGER,
-    prestasjon 		INTEGER,
     CONSTRAINT ovelse_PK PRIMARY KEY (ovelseID),
     CONSTRAINT ovelsesgruppe_FK FOREIGN KEY (gruppeID) REFERENCES Ovelsesgruppe(gruppeID)
 													   ON UPDATE CASCADE
@@ -32,6 +30,8 @@ CREATE TABLE Treningsokt (
     dato 			DATE	NOT NULL,
     tidspunkt 		TIME	NOT NULL,
     varighet 		INTEGER NOT NULL,
+    form 			INTEGER,
+    prestasjon 		INTEGER,
     treningspartner INTEGER,
     notat 			VARCHAR(250),
     CONSTRAINT treningsokt_PK PRIMARY KEY (oktID),

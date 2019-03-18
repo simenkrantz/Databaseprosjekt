@@ -8,11 +8,6 @@ public class Frittstaende extends Ovelse{
         this.beskrivelse = beskrivelse;
     }
 
-    public Frittstaende(int ovelseID, String navn, int form, int prestasjon, String beskrivelse){
-        super(ovelseID, navn, form, prestasjon);
-        this.beskrivelse = beskrivelse;
-    }
-
     public String getBeskrivelse(){
         return beskrivelse;
     }

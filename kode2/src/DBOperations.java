@@ -64,9 +64,9 @@ public class DBOperations {
         }
     }
 
-    public static void addFastmontert(Connection conn, String navn, int form, int prestasjon, int antallKg, int antallSett, Apparat apparat) {
+    public static void addFastmontert(Connection conn, String navn, int antallKg, int antallSett, Apparat apparat) {
 
-        String queryOvelse = "INSERT INTO Ovelse (navn, form, prestasjon) VALUES (?,?,?)";
+        String queryOvelse = "INSERT INTO Ovelse (navn, form, prestasjon) VALUES (?)";
         String queryFastmontert = "INSERT INTO Fastmontert (ovelseID, antall_kg, antall_sett, apparat) VALUES (?,?,?,?)";
         
 
@@ -74,8 +74,6 @@ public class DBOperations {
             PreparedStatement prepStatOvelse = conn.prepareStatement(queryOvelse);
 
             prepStatOvelse.setString(1, navn);
-            prepStatOvelse.setInt(2, form);
-            prepStatOvelse.setInt(3, prestasjon);
 
             prepStatOvelse.execute();
         } catch (Exception e) {
@@ -100,9 +98,9 @@ public class DBOperations {
         }
     }
 
-    public static void addFrittstaende(Connection conn, String navn, int form, int prestasjon, String beskrivelse) {
+    public static void addFrittstaende(Connection conn, String navn, String beskrivelse) {
 
-        String queryOvelse = "INSERT INTO Ovelse (navn, form, prestasjon) VALUES (?,?,?)";
+        String queryOvelse = "INSERT INTO Ovelse (navn) VALUES (?)";
         String queryFritt = "INSERT INTO Frittstaende (ovelseID, beskrivelse) VALUES (?,?)";
 
 
@@ -110,8 +108,6 @@ public class DBOperations {
             PreparedStatement prepStatOvelse = conn.prepareStatement(queryOvelse);
 
             prepStatOvelse.setString(1, navn);
-            prepStatOvelse.setInt(2, form);
-            prepStatOvelse.setInt(3, prestasjon);
 
             prepStatOvelse.execute();
         } catch (Exception e) {
@@ -132,9 +128,9 @@ public class DBOperations {
         }
     }
 
-    public static void addTreningsOkt(Connection conn, java.sql.Date dato, java.sql.Time tidspunkt, int varighet, Person partner, String notat) {
+    public static void addTreningsokt(Connection conn, java.sql.Date dato, java.sql.Time tidspunkt, int varighet, int form, int prestasjon, Person partner, String notat) {
 
-        String query = "INSERT INTO Treningsokt(dato, tidspunkt,varighet,treningspartner,notat) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO Treningsokt(dato, tidspunkt,varighet,form,prestasjon,treningspartner,notat) VALUES (?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement prepStat = conn.prepareStatement(query);
@@ -142,8 +138,10 @@ public class DBOperations {
             prepStat.setDate(1, dato);
             prepStat.setTime(2, tidspunkt);
             prepStat.setInt(3, varighet);
-            prepStat.setInt(4, partner.getPersonID());
-            prepStat.setString(5, notat);
+            prepStat.setInt(4, form);
+            prepStat.setInt(5,prestasjon);
+            prepStat.setInt(6, partner.getPersonID());
+            prepStat.setString(7, notat);
 
             prepStat.execute();
 
@@ -155,9 +153,9 @@ public class DBOperations {
         }
     }
 
-    public static void addTreningsOkt(Connection conn, java.sql.Date dato, java.sql.Time tidspunkt, int varighet, String notat) {
+    public static void addTreningsokt(Connection conn, java.sql.Date dato, java.sql.Time tidspunkt, int varighet,int form, int prestasjon, String notat) {
 
-        String query = "INSERT INTO Treningsokt(dato, tidspunkt,varighet,notat) VALUES (?,?,?,?)";
+        String query = "INSERT INTO Treningsokt(dato, tidspunkt,varighet,form,prestasjon, notat) VALUES (?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement prepStat = conn.prepareStatement(query);
@@ -165,7 +163,9 @@ public class DBOperations {
             prepStat.setDate(1, dato);
             prepStat.setTime(2, tidspunkt);
             prepStat.setInt(3, varighet);
-            prepStat.setString(4, notat);
+            prepStat.setInt(4, form);
+            prepStat.setInt(5,prestasjon);
+            prepStat.setString(7, notat);
 
             prepStat.execute();
 
@@ -219,8 +219,7 @@ public class DBOperations {
         ResultSet rs = prepStat.executeQuery();
 
         while(rs.next()) {
-            Ovelse o = new Frittstaende(rs.getInt("ovelseID"), rs.getString("navn"), rs.getInt("form"), 
-                                        rs.getInt("prestasjon"), rs.getString("beskrivelse"));
+            Ovelse o = new Frittstaende(rs.getInt("ovelseID"), rs.getString("navn"), rs.getString("beskrivelse"));
             ovelser.add(o);
         }
 
@@ -231,8 +230,8 @@ public class DBOperations {
         while(rs2.next()) {
             for(Apparat a : getApparater(conn)){
                 if (a.getApparatID() == rs2.getInt("apparat")){
-                    Ovelse o = new Fastmontert(rs2.getInt("ovelseID"), rs2.getString("navn"), rs2.getInt("form"),
-                                                rs2.getInt("prestasjon"), rs2.getInt("antall_kg"),rs2.getInt("antall_sett"), a);
+                    Ovelse o = new Fastmontert(rs2.getInt("ovelseID"), rs2.getString("navn"),
+                            rs2.getInt("antall_kg"),rs2.getInt("antall_sett"), a);
                     ovelser.add(o);
                 }
             } 
@@ -248,8 +247,7 @@ public class DBOperations {
         ResultSet rs = prepStat.executeQuery();
 
         while(rs.next()) {
-            Ovelse o = new Ovelse(rs.getInt("ovelseID"), rs.getString("navn"),
-                    rs.getInt("form"), rs.getInt("prestasjon"));
+            Ovelse o = new Ovelse(rs.getInt("ovelseID"), rs.getString("navn"));
             ovelser.add(o);
         }
 
@@ -298,13 +296,13 @@ public class DBOperations {
                 for (Person p : getPersoner(conn)){
                     if (rs.getInt("treningspartner") == p.getPersonID()){
                         Treningsokt t = new Treningsokt(rs.getInt("oktID") , rs.getDate("dato"), rs.getTime("tidspunkt"),
-                                                        rs.getInt("varighet"), rs.getString("notat"), p);
+                                                        rs.getInt("varighet"), rs.getInt("form"), rs.getInt("prestasjon"), rs.getString("notat"), p);
                         treningsOkter.add(t);
                     }
                 }
             } else {
                 Treningsokt t = new Treningsokt(rs.getInt("oktID") , rs.getDate("dato"), rs.getTime("tidspunkt"),
-                rs.getInt("varighet"), rs.getString("notat"));
+                rs.getInt("varighet"), rs.getInt("form"), rs.getInt("prestasjon"), rs.getString("notat"));
                 treningsOkter.add(t);
             }
         }

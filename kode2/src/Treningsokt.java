@@ -6,6 +6,8 @@ public class Treningsokt {
     private java.sql.Date dato;
     private java.sql.Time tidspunkt;
     private int varighet;
+    private int form;
+    private int prestasjon;
     private String notat;
     private Person partner;
     private List<Ovelse> ovelser;
@@ -20,21 +22,25 @@ public class Treningsokt {
         this.ovelser = new ArrayList<Ovelse>();
     }
 
-    public Treningsokt(int oktID, java.sql.Date dato, java.sql.Time tidspunkt, int varighet, String notat) {
+    public Treningsokt(int oktID, java.sql.Date dato, java.sql.Time tidspunkt, int varighet, int form, int prestasjon, String notat) {
         this.oktID = oktID;
         this.dato = dato;
         this.tidspunkt = tidspunkt;
         this.varighet = varighet;
+        this.form = form;
+        this.prestasjon = prestasjon;
         this.notat = notat;
         this.partner = null;
         this.ovelser = new ArrayList<Ovelse>();
     }
 
-    public Treningsokt(int oktID, java.sql.Date dato, java.sql.Time tidspunkt, int varighet, String notat, Person partner) {
+    public Treningsokt(int oktID, java.sql.Date dato, java.sql.Time tidspunkt, int varighet,int form, int prestasjon, String notat, Person partner) {
         this.oktID = oktID;
         this.dato = dato;
         this.tidspunkt = tidspunkt;
         this.varighet = varighet;
+        this.form = form;
+        this.prestasjon = prestasjon;
         this.notat = notat;
         this.partner = partner;
         this.ovelser = new ArrayList<Ovelse>();
@@ -61,6 +67,22 @@ public class Treningsokt {
     public Person getPartner() { return partner; }
 
     public void setPartner(Person partner) { this.partner = partner; }
+
+    public int getForm(){
+        return form;
+    }
+
+    public void setForm(int form){
+        this.form = form;
+    }
+
+    public int getPrestasjon(){
+        return prestasjon;
+    }
+
+    public void setPrestasjon(int prestasjon){
+        this.prestasjon = prestasjon;
+    }
 
     public void addOvelse(Ovelse ovelse) { ovelser.add(ovelse); }
 

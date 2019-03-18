@@ -23,12 +23,6 @@ public class TreningsCtrl extends DBConn {
         System.out.println("Skriv inn navn på øvelse: ");
         String navn = scanner.nextLine();
 
-        System.out.println("Skriv inn form (int): ");
-        int form = Integer.parseInt(scanner.nextLine());
-
-        System.out.println("Skriv inn prestasjon (int): ");
-        int prestasjon = Integer.parseInt(scanner.nextLine());
-
         System.out.println("Fastmontert(1) eller Frittstående(2): ");
         int type = Integer.parseInt(scanner.nextLine());
         
@@ -47,7 +41,7 @@ public class TreningsCtrl extends DBConn {
             for (Apparat a : DBOperations.getApparater(conn)){
                 if (apparatID == a.getApparatID()){
                     apparatOK = true;
-                    DBOperations.addFastmontert(conn, navn, form, prestasjon, antallKg, antallSett, a);
+                    DBOperations.addFastmontert(conn, navn, antallKg, antallSett, a);
                     break;
                 }
             }
@@ -58,7 +52,7 @@ public class TreningsCtrl extends DBConn {
             System.out.println("Skriv inn beskrivelse på øvelse: ");
             String beskrivelse = scanner.nextLine();
 
-            DBOperations.addFrittstaende(conn, navn, form, prestasjon,beskrivelse);
+            DBOperations.addFrittstaende(conn, navn,beskrivelse);
         }
 
 
@@ -76,6 +70,13 @@ public class TreningsCtrl extends DBConn {
         System.out.println("Skriv inn varigheten på økt (int minutter): ");
         int varighet = Integer.parseInt(scanner.nextLine());
 
+        System.out.println("Skriv inn form (int): ");
+        int form = Integer.parseInt(scanner.nextLine());
+
+        System.out.println("Skriv inn prestasjon (int): ");
+        int prestasjon = Integer.parseInt(scanner.nextLine());
+
+
         DBOperations.printPersoner(conn);
 
         System.out.println("Skriv inn id på treningspartner (-1 hvis ingen): ");
@@ -89,7 +90,7 @@ public class TreningsCtrl extends DBConn {
             for (Person p : DBOperations.getPersoner(conn)) {
                 if (personID == p.getPersonID()) {
                     personOK = true;
-                    DBOperations.addTreningsOkt(conn, dato, tidspunkt, varighet, p, notat);
+                    DBOperations.addTreningsokt(conn, dato, tidspunkt, varighet,form,prestasjon, p, notat);
                     break;
                 }
             }
@@ -97,7 +98,7 @@ public class TreningsCtrl extends DBConn {
                 System.out.println("Personen finnes ikke");
             }
         } else {
-            DBOperations.addTreningsOkt(conn,dato,tidspunkt,varighet,notat);
+            DBOperations.addTreningsokt(conn,dato,tidspunkt,varighet,form,prestasjon,notat);
         }
     }
 
