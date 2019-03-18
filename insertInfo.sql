@@ -1,38 +1,35 @@
--- ID, Navn, Beskrivelse
-INSERT INTO Apparat VALUES (1, 'Benk', 'Benk med stang'), (2, 'Mølle', 'Til løping'), (3, 'Romaskin', 'Sånn man ror med'),
-(4, 'Bakkeløp', 'Intervalltrening opp bakker'), (5, 'Traktordekk', 'Crossfitraritet'),
-(6, 'Sykkel', 'Sånn man sykler med'), (7, 'Multiapparat', 'For diverse øvelser');
+-- Navn, Beskrivelse
+INSERT INTO Apparat VALUES ('Benk', 'Benk med stang'), ('Mølle', 'Til løping'), ('Romaskin', 'Sånn man ror med'),
+('Bakkeløp', 'Intervalltrening opp bakker'), ('Traktordekk', 'Crossfitraritet'),
+('Sykkel', 'Sånn man sykler med'), ('Multiapparat', 'For diverse øvelser');
 
--- ID, Navn
-INSERT INTO Ovelsesgruppe VALUES (1, 'Brystøvelser'),(2,'Ryggøvelser'),(3,'Beinøvelser'),(4,'Kondisjonsøvelse'),
-(5,'Bicepsøvelser'),(6,'Tricepsøvelser'),(7,'Magesøvelse'),(8,'Skulderøvelser');
+-- Navn
+INSERT INTO Ovelsesgruppe VALUES ('Brystøvelser'),('Ryggøvelser'),('Beinøvelser'),('Kondisjonsøvelse'),
+('Bicepsøvelser'),('Tricepsøvelser'),('Magesøvelse'),('Skulderøvelser');
 
--- ID, Navn, Gruppe, Form, Prestasjon
-INSERT INTO Ovelse VALUES (1,'Benkpress',1,8,6),(2,'Roing',3,4,1),(3,'Dips',6,8,5),
-(4,'Bakkeløp',4,10,10),(5,'Jogging',4,5,3),(6,'Utfall',3,5,5),(7,'Knebøy',3,6,10),
-(8,'Bicepscurl',5,7,4),(9,'Militærpress',8,1,3),(10,'Hangups',2,4,7),(11,'Triceps pushdown',6,8,8),
-(12,'Sykling',4,1,4),(13,'Sittende roing',2,5,4),(14,'Pushups',1,6,7),(15,'Situps',7,8,8);
+-- Navn, Gruppe
+-- INSERT INTO Ovelse VALUES ('Benkpress',1),('Roing',3),('Dips',6),
+-- ('Bakkeløp',4),('Jogging',4),('Utfall',3),('Knebøy',3),
+-- ('Bicepscurl',5),('Militærpress',8),('Hangups',2),('Triceps pushdown',6),
+-- ('Sykling',4),('Sittende roing',2),('Pushups',1),('Situps',7);
 
 -- ØvelseID, Beskrivelse
-INSERT INTO Frittstaende VALUES (3,'Dipsbeskrivelse'),(4,'Bakkeløp er bare løping'),
-(5,'Jogging er kjedelig løping'),(6,'Dont skip leg day'),(7,'SQUAT'),(14,'For them abs');
+-- INSERT INTO Frittstaende VALUES (3,'Dipsbeskrivelse'),(4,'Bakkeløp er bare løping'),
+-- (5,'Jogging er kjedelig løping'),(6,'Dont skip leg day'),(7,'SQUAT'),(14,'For them abs');
 
 -- ØvelseID, Antall kg, Antall sett, Apparat
-INSERT INTO Fastmontert VALUES (1,120,10,1),(2,10,3,3),
-(10,85,3,7),(12,50,3,7);
+-- INSERT INTO Fastmontert VALUES (1,120,10,1),(2,10,3,3),
+-- (10,85,3,7),(12,50,3,7);
 
--- ID, Navn, Tlf.nr, Favorittøvelse
-INSERT INTO Person VALUES (1,'Kjell Aukrust','69696969',6),(2,'Harald Heide Steen','41454554',12),
-(3,'OJ (not Simpson)','98564211',9),(4,'Halvor','97470077',1),(5,'Simen','44111425',3);
+-- Navn, Tlf.nr, Favorittøvelse
+INSERT INTO Person VALUES ('Kjell Aukrust',69696969,NULL),('Harald Heide Steen',41454554,NULL),
+('OJ (not Simpson)',98564211,NULL),('Halvor',97470077,NULL),('Simen',44111425,NULL),('Turid-Laila',73805520,NULL);
 
--- ID, Dato YYYY-MM-DD, Tidspunkt hh:mm:ss, Varighet [min], Treningspartner, Notat
-INSERT INTO Treningsokt VALUES (1,'2019-03-02', '13:08:00', 60,NULL,'OK');
-UPDATE Treningsokt
-SET treningspartner = 1
-WHERE oktID = 1;
+-- Dato YYYY-MM-DD, Tidspunkt hh:mm:ss, Varighet [min], Form, Prestasjon, Treningspartner, Notat
+INSERT INTO Treningsokt VALUES ('2019-03-02', '13:08:00', 60, 9, 7,NULL,'OK'),
+('2018-12-29','10:08:34',35,4,8,3,'God kok, Tutten kjører svett push'),('2010-08-07','22:09:00',120,10,10,NULL,'Kai prepper prottispulver i garderoben, mæget god S'),
+('2018-12-28','08:00:10', 55,2,3,4,'Spysjuk etter et heidundrandes kalas med Roger, men gønnsa må pumpes'),('2019-01:30','12:23:56',67,10,10,6,'Turid-Laila på mølla må jo bli bra'),
+('2016-10-14','14:45:32',14,1,2,2,'Nøtternte å løpe bakkeløp i hasjrus'),('20119-03-01','23:14:09',44,8,9,NULL,'OK');
 
 -- ØktID, ØvelseID
-INSERT INTO Ovelseriokt VALUES (1,1),(1,3);
-
-SELECT oktID AS Økt, dato, tidspunkt, varighet AS Øktvarighet, Person.navn AS Treningspartner, Ovelse.navn AS Øvelse 
-FROM ((Treningsokt NATURAL JOIN Ovelseriokt) NATURAL JOIN Ovelse) INNER JOIN Person ON Treningsokt.treningspartner = Person.personID;
+INSERT INTO Ovelseriokt VALUES (1,1),(1,3),(1,5),(2,3),(),(),(),(),(),(),(),();
