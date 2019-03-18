@@ -5,13 +5,13 @@ public class Fastmontert extends Ovelse {
     private int antallSett;
     private Apparat apparat;
 
-    public Fastmontert(int ovelseID, String navn, Apparat apparat){
-        super(ovelseID, navn);
+    public Fastmontert(int ovelseID, String navn,Ovelsesgruppe gruppe, Apparat apparat){
+        super(ovelseID, navn,gruppe);
         this.apparat = apparat;
     }
 
-    public Fastmontert(int ovelseID, String navn, int antallKg, int antallSett, Apparat apparat){
-        super(ovelseID, navn);
+    public Fastmontert(int ovelseID, String navn,Ovelsesgruppe gruppe, int antallKg, int antallSett, Apparat apparat){
+        super(ovelseID, navn, gruppe);
         this.antallKg = antallKg;
         this.antallSett = antallSett;
         this.apparat = apparat;

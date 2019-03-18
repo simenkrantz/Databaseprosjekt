@@ -7,9 +7,9 @@ import java.util.Scanner;
 public class DBOperations {
 
     public static void addApparat(Connection conn, String navn, String beskrivelse) {
-        
+
         String query = "INSERT INTO Apparat (navn, beskrivelse) VALUES (?,?)";
-        
+
         try {
             PreparedStatement prepStat = conn.prepareStatement(query);
 
@@ -23,6 +23,23 @@ public class DBOperations {
         } catch (Exception e) {
             throw new RuntimeException("DB error when inserting Apparat", e);
             //System.out.println("DB error when inserting Apparat");
+        }
+    }
+
+    public static void addOvelsesgruppe(Connection conn, String navn) {
+        String query = "INSERT INTO Ovelsesgruppe (navn) VALUES (?)";
+
+        try {
+            PreparedStatement prepStat = conn.prepareStatement(query);
+
+            prepStat.setString(1, navn);
+
+            prepStat.execute();
+
+            System.out.println("Ovelsesgruppe lagt til");
+
+        } catch (Exception e) {
+            throw new RuntimeException("DB error when inserting ovelsesgruppe", e);
         }
     }
 
@@ -65,9 +82,9 @@ public class DBOperations {
         }
     }
 
-    public static void addFastmontert(Connection conn, String navn, int antallKg, int antallSett, Apparat apparat) {
+    public static void addFastmontert(Connection conn, String navn, Ovelsesgruppe gruppe, int antallKg, int antallSett, Apparat apparat) {
 
-        String queryOvelse = "INSERT INTO Ovelse (navn) VALUES (?)";
+        String queryOvelse = "INSERT INTO Ovelse (navn, gruppeID) VALUES (?,?)";
         String queryFastmontert = "INSERT INTO Fastmontert (ovelseID, antall_kg, antall_sett, apparat) VALUES (?,?,?,?)";
         
 
@@ -75,6 +92,7 @@ public class DBOperations {
             PreparedStatement prepStatOvelse = conn.prepareStatement(queryOvelse);
 
             prepStatOvelse.setString(1, navn);
+            prepStatOvelse.setInt(2,gruppe.getGruppeID());
 
             prepStatOvelse.execute();
         } catch (Exception e) {
@@ -99,9 +117,9 @@ public class DBOperations {
         }
     }
 
-    public static void addFrittstaende(Connection conn, String navn, String beskrivelse) {
+    public static void addFrittstaende(Connection conn, String navn, Ovelsesgruppe gruppe, String beskrivelse) {
 
-        String queryOvelse = "INSERT INTO Ovelse (navn) VALUES (?)";
+        String queryOvelse = "INSERT INTO Ovelse (navn, gruppeID) VALUES (?,?)";
         String queryFritt = "INSERT INTO Frittstaende (ovelseID, beskrivelse) VALUES (?,?)";
 
 
@@ -109,6 +127,7 @@ public class DBOperations {
             PreparedStatement prepStatOvelse = conn.prepareStatement(queryOvelse);
 
             prepStatOvelse.setString(1, navn);
+            prepStatOvelse.setInt(2,gruppe.getGruppeID());
 
             prepStatOvelse.execute();
         } catch (Exception e) {
@@ -220,8 +239,12 @@ public class DBOperations {
         ResultSet rs = prepStat.executeQuery();
 
         while(rs.next()) {
-            Ovelse o = new Frittstaende(rs.getInt("ovelseID"), rs.getString("navn"), rs.getString("beskrivelse"));
-            ovelser.add(o);
+            for (Ovelsesgruppe g : getOvelsesgrupper(conn)) {
+                if (rs.getInt("gruppeID") == g.getGruppeID()) {
+                    Ovelse o = new Frittstaende(rs.getInt("ovelseID"), rs.getString("navn"), g, rs.getString("beskrivelse"));
+                    ovelser.add(o);
+                }
+            }
         }
 
         String stmt2 = "SELECT * FROM Fastmontert NATURAL JOIN Ovelse";
@@ -231,9 +254,13 @@ public class DBOperations {
         while(rs2.next()) {
             for(Apparat a : getApparater(conn)){
                 if (a.getApparatID() == rs2.getInt("apparat")){
-                    Ovelse o = new Fastmontert(rs2.getInt("ovelseID"), rs2.getString("navn"),
-                            rs2.getInt("antall_kg"),rs2.getInt("antall_sett"), a);
-                    ovelser.add(o);
+                    for (Ovelsesgruppe g : getOvelsesgrupper(conn)) {
+                        if (rs.getInt("gruppeID") == g.getGruppeID()) {
+                            Ovelse o = new Fastmontert(rs2.getInt("ovelseID"), rs2.getString("navn"),g,
+                                    rs2.getInt("antall_kg"), rs2.getInt("antall_sett"), a);
+                            ovelser.add(o);
+                        }
+                    }
                 }
             } 
         }
@@ -248,8 +275,12 @@ public class DBOperations {
         ResultSet rs = prepStat.executeQuery();
 
         while(rs.next()) {
-            Ovelse o = new Ovelse(rs.getInt("ovelseID"), rs.getString("navn"));
-            ovelser.add(o);
+            for (Ovelsesgruppe g : getOvelsesgrupper(conn)) {
+                if (rs.getInt("gruppeID") == g.getGruppeID()) {
+                    Ovelse o = new Ovelse(rs.getInt("ovelseID"), rs.getString("navn"),g);
+                    ovelser.add(o);
+                }
+            }
         }
 
         int storst = 1;
@@ -310,6 +341,20 @@ public class DBOperations {
         
         return treningsOkter;
 }
+
+    public static List<Ovelsesgruppe> getOvelsesgrupper(Connection conn) throws SQLException {
+        List<Ovelsesgruppe> grupper = new ArrayList<Ovelsesgruppe>();
+
+        String stmt = "select * from Ovelsesgruppe";
+        PreparedStatement prepStat = conn.prepareStatement(stmt);
+        ResultSet rs = prepStat.executeQuery();
+
+        while(rs.next()) {
+                Ovelsesgruppe g = new Ovelsesgruppe(rs.getInt("gruppeID"), rs.getString("navn"));
+                grupper.add(g);
+            }
+        return grupper;
+    }
 
     public static List<Ovelse> getOvelserITreningsokt(Connection conn, Treningsokt okt) throws SQLException {
         List<Ovelse> ovelseriokt = new ArrayList<Ovelse>();
@@ -405,15 +450,17 @@ public class DBOperations {
         ResultSet rs = prepStat.executeQuery();
 
         while(rs.next()){
-            System.out.println("ID: " + rs.getInt("ovelseID") + ", navn: " + rs.getString("navn"));
+            for (Ovelsesgruppe g : getOvelsesgrupper(conn)) {
+                if (rs.getInt("gruppeID") == g.getGruppeID()) {
+                    System.out.println("ID: " + rs.getInt("ovelseID") + ", navn: " + rs.getString("navn") + " Øvelsesgruppe: " + g.getNavn());
+                }
+            }
         }
     }
 
-    public  static void printTreningsokter(Connection conn) throws SQLException {
+    public static void printTreningsokter(Connection conn) throws SQLException {
 
-        List<Treningsokt> oktList = getTreningsOkter(conn);
-
-        for (Treningsokt t : oktList){
+        for (Treningsokt t : getTreningsOkter(conn)){
             if (t.getPartner() != null){
                 System.out.println("ID: " + t.getOktID() + ", dato: " + t.getDato()+ ", tidspunkt: " + t.getTidspunkt() +
                         " treningspartner: " + t.getPartner().getNavn());
@@ -431,5 +478,11 @@ public class DBOperations {
             System.out.println("ID: " + rs.getInt("oktID") + ", dato: " + rs.getString("dato")+
                     ", tidspunkt: " + rs.getString("tidspunkt"));
         }*/
+    }
+
+    public static void printOvelsesgrupper(Connection conn) throws SQLException {
+        for (Ovelsesgruppe g : getOvelsesgrupper(conn)){
+            System.out.println("ID: " + g.getGruppeID() + " navn: " + g.getNavn());
+        }
     }
 }

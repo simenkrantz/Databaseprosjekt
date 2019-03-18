@@ -17,11 +17,25 @@ public class TreningsCtrl extends DBConn {
         DBOperations.addApparat(conn, navn, beskrivelse);
     }
 
+    public void addOvelsesgruppe(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Skriv inn navn på Øvelsesgruppe: ");
+        String navn = scanner.nextLine();
+
+        DBOperations.addOvelsesgruppe(conn, navn);
+    }
+
     public void addOvelse() throws SQLException {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Skriv inn navn på øvelse: ");
         String navn = scanner.nextLine();
+
+        DBOperations.printOvelsesgrupper(conn);
+
+        System.out.println("Skriv inn id på øvelsesgruppe øvelsen er i: ");
+        int gruppeID = Integer.parseInt(scanner.nextLine());
 
         System.out.println("Fastmontert(1) eller Frittstående(2): ");
         int type = Integer.parseInt(scanner.nextLine());
@@ -41,7 +55,12 @@ public class TreningsCtrl extends DBConn {
             for (Apparat a : DBOperations.getApparater(conn)){
                 if (apparatID == a.getApparatID()){
                     apparatOK = true;
-                    DBOperations.addFastmontert(conn, navn, antallKg, antallSett, a);
+                    for (Ovelsesgruppe g : DBOperations.getOvelsesgrupper(conn)){
+                        if (gruppeID == g.getGruppeID()){
+                            DBOperations.addFastmontert(conn, navn,g, antallKg, antallSett, a);
+                        }
+                    }
+
                     break;
                 }
             }
@@ -52,7 +71,12 @@ public class TreningsCtrl extends DBConn {
             System.out.println("Skriv inn beskrivelse på øvelse: ");
             String beskrivelse = scanner.nextLine();
 
-            DBOperations.addFrittstaende(conn, navn,beskrivelse);
+            for (Ovelsesgruppe g : DBOperations.getOvelsesgrupper(conn)){
+                if (gruppeID == g.getGruppeID()){
+                    DBOperations.addFrittstaende(conn, navn,g,beskrivelse);
+                }
+            }
+
         }
 
 
@@ -179,6 +203,10 @@ public class TreningsCtrl extends DBConn {
 
     public void printTreningsokter() throws SQLException {
         DBOperations.printTreningsokter(conn);
+    }
+
+    public void printOvelsesgrupper() throws SQLException {
+        DBOperations.printOvelsesgrupper(conn);
     }
 
     public void printOvelserITreningsokt() throws SQLException {

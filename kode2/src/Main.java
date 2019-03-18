@@ -54,6 +54,12 @@ public class Main {
                 case 12:
                     treningsCtrl.printNSisteTreningsokter();
                     break;
+                case 13:
+                    treningsCtrl.printOvelsesgrupper();
+                    break;
+                case 14:
+                    treningsCtrl.addOvelsesgruppe();
+                    break;
                 default:
                     System.out.println("Ikke et valg, velg igjen");
             }
@@ -78,7 +84,8 @@ public class Main {
         System.out.println("10: Skriv ut hvilke Øvelser som er i Treningsøkt");
         System.out.println("11: Skriv ut logg for en øvelse");
         System.out.println("12: Skriv ut logg for n siste treningsøkter");
-
+        System.out.println("13: Skriv ut Øvelsesgrupper");
+        System.out.println("14: Legg til Øvelsesgruppe");
     }
 
 }
