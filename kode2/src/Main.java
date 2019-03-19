@@ -49,7 +49,7 @@ public class Main {
                     treningsCtrl.printOvelserITreningsokt();
                     break;
                 case 11:
-                    treningsCtrl.printTreningsokterOvelseErI();
+                    treningsCtrl.printLoggForOvelseITidsrom();
                     break;
                 case 12:
                     treningsCtrl.printNSisteTreningsokter();
@@ -60,6 +60,9 @@ public class Main {
                 case 14:
                     treningsCtrl.addOvelsesgruppe();
                     break;
+                case 15:
+                    treningsCtrl.printOvelserIOvelsesgruppe();
+                    break;
                 default:
                     System.out.println("Ikke et valg, velg igjen");
             }
@@ -69,7 +72,7 @@ public class Main {
     }
 
     public static void printMenu(){
-        System.out.println("meny: ");
+        System.out.println("\nMENY: ");
         System.out.println("0: AVSLUTT");
         System.out.println("1: Legg til Apparat");
         System.out.println("2: Legg til Øvelse");
@@ -86,6 +89,8 @@ public class Main {
         System.out.println("12: Skriv ut logg for n siste treningsøkter");
         System.out.println("13: Skriv ut Øvelsesgrupper");
         System.out.println("14: Legg til Øvelsesgruppe");
+        System.out.println("15: Skriv ut Øvelser i Øvelsesgruppe");
+        System.out.printf("\nSkriv inn et valg: ");
     }
 
 }

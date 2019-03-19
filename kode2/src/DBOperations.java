@@ -238,8 +238,9 @@ public class DBOperations {
         PreparedStatement prepStat = conn.prepareStatement(stmt);
         ResultSet rs = prepStat.executeQuery();
 
+        List<Ovelsesgruppe> gruppeList = getOvelsesgrupper(conn);
         while(rs.next()) {
-            for (Ovelsesgruppe g : getOvelsesgrupper(conn)) {
+            for (Ovelsesgruppe g : gruppeList) {
                 if (rs.getInt("gruppeID") == g.getGruppeID()) {
                     Ovelse o = new Frittstaende(rs.getInt("ovelseID"), rs.getString("navn"), g, rs.getString("beskrivelse"));
                     ovelser.add(o);
@@ -251,10 +252,12 @@ public class DBOperations {
         PreparedStatement prepStat2 = conn.prepareStatement(stmt2);
         ResultSet rs2 = prepStat2.executeQuery();
 
+        List<Apparat> apparatList = getApparater(conn);
         while(rs2.next()) {
-            for(Apparat a : getApparater(conn)){
+            for(Apparat a : apparatList){
                 if (a.getApparatID() == rs2.getInt("apparat")){
-                    for (Ovelsesgruppe g : getOvelsesgrupper(conn)) {
+                    gruppeList = getOvelsesgrupper(conn);
+                    for (Ovelsesgruppe g : gruppeList) {
                         if (rs2.getInt("gruppeID") == g.getGruppeID()) {
                             Ovelse o = new Fastmontert(rs2.getInt("ovelseID"), rs2.getString("navn"),g,
                                     rs2.getInt("antall_kg"), rs2.getInt("antall_sett"), a);
@@ -273,9 +276,9 @@ public class DBOperations {
         String stmt = "select * from Ovelse";
         PreparedStatement prepStat = conn.prepareStatement(stmt);
         ResultSet rs = prepStat.executeQuery();
-
+        List<Ovelsesgruppe> gruppeList = getOvelsesgrupper(conn);
         while(rs.next()) {
-            for (Ovelsesgruppe g : getOvelsesgrupper(conn)) {
+            for (Ovelsesgruppe g : gruppeList) {
                 if (rs.getInt("gruppeID") == g.getGruppeID()) {
                     Ovelse o = new Ovelse(rs.getInt("ovelseID"), rs.getString("navn"),g);
                     ovelser.add(o);
@@ -299,9 +302,10 @@ public class DBOperations {
         PreparedStatement prepStat = conn.prepareStatement(stmt);
         ResultSet rs = prepStat.executeQuery();
 
+        List<Ovelse> ovelseList = getOvelser(conn);
         while(rs.next()) {
             if (rs.getObject("favorittovelse") != null){
-                for (Ovelse o : getOvelser(conn)){
+                for (Ovelse o : ovelseList){
                     if(o.getOvelseID() == rs.getInt("favorittovelse")){
                         Person p = new Person(rs.getInt("personID"), rs.getString("navn"), rs.getInt("tlfnr"), o);
                         personer.add(p);
@@ -322,10 +326,11 @@ public class DBOperations {
         String stmt = "select * from Treningsokt";
         PreparedStatement prepStat = conn.prepareStatement(stmt);
         ResultSet rs = prepStat.executeQuery();
-        
+
+        List<Person> personList = getPersoner(conn);
         while(rs.next()) {
             if (rs.getObject("treningspartner") != null){
-                for (Person p : getPersoner(conn)){
+                for (Person p : personList){
                     if (rs.getInt("treningspartner") == p.getPersonID()){
                         Treningsokt t = new Treningsokt(rs.getInt("oktID") , rs.getDate("dato"), rs.getTime("tidspunkt"),
                                                         rs.getInt("varighet"), rs.getInt("form"), rs.getInt("prestasjon"), rs.getString("notat"), p);
@@ -363,9 +368,10 @@ public class DBOperations {
         PreparedStatement prepStat = conn.prepareStatement(stmt);
         ResultSet rs = prepStat.executeQuery();
 
+        List<Ovelse> ovelseList = getOvelser(conn);
         while(rs.next()) {
             if (rs.getInt("oktID") == okt.getOktID()) {
-                for (Ovelse o : getOvelser(conn)) {
+                for (Ovelse o : ovelseList) {
                     if (rs.getInt("ovelseID") == o.getOvelseID()){
                         ovelseriokt.add(o);
                     }
@@ -383,9 +389,10 @@ public class DBOperations {
         PreparedStatement prepStat = conn.prepareStatement(stmt);
         ResultSet rs = prepStat.executeQuery();
 
+        List<Treningsokt> oktList = getTreningsOkter(conn);
         while(rs.next()) {
             if (rs.getInt("ovelseID") == ovelse.getOvelseID()) {
-                for (Treningsokt t : getTreningsOkter(conn)) {
+                for (Treningsokt t : oktList) {
                     if (rs.getInt("oktID") == t.getOktID()){
                         okter.add(t);
                     }
@@ -404,9 +411,10 @@ public class DBOperations {
         ResultSet rs = prepStat.executeQuery();
 
         int n = 0;
+        List<Person> personList = getPersoner(conn);
         while(rs.next() && n < num) {
             if (rs.getObject("treningspartner") != null){
-                for (Person p : getPersoner(conn)){
+                for (Person p : personList){
                     if (rs.getInt("treningspartner") == p.getPersonID()){
                         Treningsokt t = new Treningsokt(rs.getInt("oktID") , rs.getDate("dato"), rs.getTime("tidspunkt"),
                                 rs.getInt("varighet"), rs.getInt("form"), rs.getInt("prestasjon"), rs.getString("notat"), p);
@@ -422,6 +430,17 @@ public class DBOperations {
         }
 
         return treningsOkter;
+    }
+
+    public static List<Ovelse> getOvelserIOvelsesgruppe(Connection conn, Ovelsesgruppe g) throws SQLException {
+        List<Ovelse> ovelseList = getOvelser(conn);
+        List<Ovelse> returnList = new ArrayList<>();
+        for (Ovelse o : ovelseList){
+            if (o.getGruppe().getGruppeID() == g.getGruppeID()){
+                returnList.add(o);
+            }
+        }
+        return returnList;
     }
 
     public static void printApparater(Connection conn) throws SQLException{
@@ -449,8 +468,9 @@ public class DBOperations {
         PreparedStatement prepStat = conn.prepareStatement(queryStatement);
         ResultSet rs = prepStat.executeQuery();
 
+        List<Ovelsesgruppe> gruppeList = getOvelsesgrupper(conn);
         while(rs.next()){
-            for (Ovelsesgruppe g : getOvelsesgrupper(conn)) {
+            for (Ovelsesgruppe g : gruppeList) {
                 if (rs.getInt("gruppeID") == g.getGruppeID()) {
                     System.out.println("ID: " + rs.getInt("ovelseID") + ", navn: " + rs.getString("navn") + " Øvelsesgruppe: " + g.getNavn());
                 }
@@ -459,8 +479,8 @@ public class DBOperations {
     }
 
     public static void printTreningsokter(Connection conn) throws SQLException {
-
-        for (Treningsokt t : getTreningsOkter(conn)){
+        List<Treningsokt> oktList = getTreningsOkter(conn);
+        for (Treningsokt t : oktList){
             if (t.getPartner() != null){
                 System.out.println("ID: " + t.getOktID() + ", dato: " + t.getDato()+ ", tidspunkt: " + t.getTidspunkt() +
                         " treningspartner: " + t.getPartner().getNavn());
@@ -481,7 +501,8 @@ public class DBOperations {
     }
 
     public static void printOvelsesgrupper(Connection conn) throws SQLException {
-        for (Ovelsesgruppe g : getOvelsesgrupper(conn)){
+        List<Ovelsesgruppe> gruppeList = getOvelsesgrupper(conn);
+        for (Ovelsesgruppe g : gruppeList){
             System.out.println("ID: " + g.getGruppeID() + " navn: " + g.getNavn());
         }
     }

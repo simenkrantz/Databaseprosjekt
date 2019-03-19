@@ -1,3 +1,5 @@
+import com.mysql.cj.xdevapi.SqlDataResult;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -217,7 +219,8 @@ public class TreningsCtrl extends DBConn {
         System.out.println("Skriv inn id på Treningsøkten du vil se øvelsene til: ");
         int oktID = Integer.parseInt(scanner.nextLine());
 
-        for (Treningsokt t : DBOperations.getTreningsOkter(conn)){
+        List<Treningsokt> oktList = DBOperations.getTreningsOkter(conn);
+        for (Treningsokt t : oktList){
             if (oktID == t.getOktID()){
                 List<Ovelse> ovelseList = DBOperations.getOvelserITreningsokt(conn,t);
                 for (Ovelse o : ovelseList) {
@@ -228,7 +231,7 @@ public class TreningsCtrl extends DBConn {
         }
     }
 
-    public void printTreningsokterOvelseErI() throws SQLException {
+    public void printLoggForOvelseITidsrom() throws SQLException {
         Scanner scanner = new Scanner(System.in);
 
         printOvelser();
@@ -236,16 +239,33 @@ public class TreningsCtrl extends DBConn {
         System.out.println("Skriv inn id på Øvelsen du vil se logg for: ");
         int ovelseID = Integer.parseInt(scanner.nextLine());
 
-        for (Ovelse o : DBOperations.getOvelser(conn)){
+        java.sql.Date fraDato;
+        java.sql.Date tilDato;
+        do {
+            System.out.println("Skriv inn fra-dato (YYYY-MM-DD): ");
+            fraDato = java.sql.Date.valueOf(scanner.nextLine());
+
+            System.out.println("Skriv inn til-dato (YYYY-MM-DD): ");
+            tilDato = java.sql.Date.valueOf(scanner.nextLine());
+
+            if(fraDato.compareTo(tilDato) > 0){
+                System.out.println("FEIL INPUT, fra-dato er etter til-dato, prøv igjen!");
+            }
+        } while (fraDato.compareTo(tilDato) > 0);
+
+        List<Ovelse> ovelseList =DBOperations.getOvelser(conn);
+        for (Ovelse o : ovelseList){
             if (ovelseID == o.getOvelseID()){
                 List<Treningsokt> oktList = DBOperations.getTreningsokterOvelseErI(conn,o);
                 for (Treningsokt t : oktList) {
-                    if (t.getPartner() != null) {
-                        System.out.println("ID: " + t.getOktID() + " dato: " + t.getDato() +
-                                " tidspunkt: " + t.getTidspunkt() + " treningspartner: " + t.getPartner().getNavn());
-                    } else {
-                        System.out.println("ID: " + t.getOktID() + " dato: " + t.getDato() +
-                                " tidspunkt: " + t.getTidspunkt());
+                    if (t.getDato().compareTo(fraDato) > 0 && t.getDato().compareTo(tilDato) < 0) {
+                        if (t.getPartner() != null) {
+                            System.out.println("ID: " + t.getOktID() + " dato: " + t.getDato() +
+                                    " tidspunkt: " + t.getTidspunkt() + " treningspartner: " + t.getPartner().getNavn());
+                        } else {
+                            System.out.println("ID: " + t.getOktID() + " dato: " + t.getDato() +
+                                    " tidspunkt: " + t.getTidspunkt());
+                        }
                     }
                 }
                 break;
@@ -255,10 +275,11 @@ public class TreningsCtrl extends DBConn {
 
     public void printNSisteTreningsokter() throws SQLException {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Skriv inn antall [int,1-index] siste treningsøkter: ");
+        System.out.println("Skriv inn antall [int <= " + DBOperations.getTreningsOkter(conn).size() + "] siste treningsøkter: ");
         int num = Integer.parseInt(sc.nextLine());
 
-        for (Treningsokt t : DBOperations.getNSisteTreningsokter(conn, num)){
+        List<Treningsokt> oktList = DBOperations.getNSisteTreningsokter(conn, num);
+        for (Treningsokt t : oktList){
             if (t.getPartner() != null){
                 System.out.println("ID: " + t.getOktID() + ", dato: " + t.getDato()+ ", tidspunkt: " + t.getTidspunkt() +
                         ", varighet: " + t.getVarighet() + ", form: " + t.getForm()+ ", prestasjon: " + t.getPrestasjon() +
@@ -268,6 +289,26 @@ public class TreningsCtrl extends DBConn {
                 System.out.println("ID: " + t.getOktID() + ", dato: " + t.getDato()+ ", tidspunkt: " + t.getTidspunkt() +
                         ", varighet: " + t.getVarighet() + ", form: " + t.getForm()+ ", prestasjon: " + t.getPrestasjon() +
                         ", notat: " + t.getNotat());
+            }
+        }
+    }
+
+    public void printOvelserIOvelsesgruppe() throws SQLException {
+        Scanner scanner = new Scanner(System.in);
+
+        printOvelsesgrupper();
+
+        System.out.println("Skriv inn id på Øvelsesgruppen du vil se øvelsene til: ");
+        int gruppeID = Integer.parseInt(scanner.nextLine());
+
+        List<Ovelsesgruppe> gruppeList = DBOperations.getOvelsesgrupper(conn);
+        for (Ovelsesgruppe g : gruppeList) {
+            if (g.getGruppeID() == gruppeID) {
+                List<Ovelse> ovelseList = DBOperations.getOvelserIOvelsesgruppe(conn, g);
+                for (Ovelse o : ovelseList) {
+                    System.out.println("ID: " + o.getOvelseID() + " navn: " + o.getNavn());
+                }
+                break;
             }
         }
     }
