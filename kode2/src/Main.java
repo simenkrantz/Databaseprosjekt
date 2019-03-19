@@ -19,46 +19,48 @@ public class Main {
                 case 0:
                     break;
                 case 1:
-                    treningsCtrl.addApparat();
+                    treningsCtrl.addPerson();
+
                     break;
                 case 2:
-                    treningsCtrl.addOvelse();
+                    treningsCtrl.addApparat();
                     break;
                 case 3:
-                    treningsCtrl.addPerson();
+                    treningsCtrl.addOvelse();
                     break;
                 case 4:
                     treningsCtrl.addTreningsokt();
                     break;
                 case 5:
-                    treningsCtrl.addOvelseToTreningsokt();
+                    treningsCtrl.addOvelsesgruppe();
                     break;
                 case 6:
-                    treningsCtrl.printApparater();
+                    treningsCtrl.addOvelseToTreningsokt();
                     break;
                 case 7:
-                    treningsCtrl.printOvelser();
+                    treningsCtrl.printApparater();
                     break;
                 case 8:
-                    treningsCtrl.printPersoner();
+                    treningsCtrl.printOvelser();
                     break;
                 case 9:
-                    treningsCtrl.printTreningsokter();
+                    treningsCtrl.printPersoner();
+
                     break;
                 case 10:
-                    treningsCtrl.printOvelserITreningsokt();
+                    treningsCtrl.printTreningsokter();
                     break;
                 case 11:
-                    treningsCtrl.printLoggForOvelseITidsrom();
-                    break;
-                case 12:
-                    treningsCtrl.printNSisteTreningsokter();
-                    break;
-                case 13:
                     treningsCtrl.printOvelsesgrupper();
                     break;
+                case 12:
+                    treningsCtrl.printOvelserITreningsokt();
+                    break;
+                case 13:
+                    treningsCtrl.printNSisteTreningsokter();
+                    break;
                 case 14:
-                    treningsCtrl.addOvelsesgruppe();
+                    treningsCtrl.printLoggForOvelseITidsrom();
                     break;
                 case 15:
                     treningsCtrl.printOvelserIOvelsesgruppe();
@@ -74,22 +76,24 @@ public class Main {
     public static void printMenu(){
         System.out.println("\nMENY: ");
         System.out.println("0: AVSLUTT");
-        System.out.println("1: Legg til Apparat");
-        System.out.println("2: Legg til Øvelse");
-        System.out.println("3: Legg til Person");
-        System.out.println("4: Legg til Treningsøkt");
-        System.out.println("5: Legg til Øvelse i Treningsøkt");
+        System.out.println("1: Legg til Person");
+        System.out.println("2: Legg til Apparat (Use case 1.)");
+        System.out.println("3: Legg til Øvelse (Use case 1.)");
+        System.out.println("4: Legg til Treningsøkt (Use case 1.)");
+        System.out.println("5: Legg til Øvelsesgruppe (Use case 4.)");
+        System.out.println("6: Legg til Øvelse i Treningsøkt");
 
-        System.out.println("6: Skriv ut Apparater");
-        System.out.println("7: Skriv ut Øvelser");
-        System.out.println("8: Skriv ut Personer");
-        System.out.println("9: Skriv ut Treningsøkter");
-        System.out.println("10: Skriv ut hvilke Øvelser som er i Treningsøkt");
-        System.out.println("11: Skriv ut logg for en øvelse");
-        System.out.println("12: Skriv ut logg for n siste treningsøkter");
-        System.out.println("13: Skriv ut Øvelsesgrupper");
-        System.out.println("14: Legg til Øvelsesgruppe");
-        System.out.println("15: Skriv ut Øvelser i Øvelsesgruppe");
+        System.out.println("");
+        System.out.println("7: Skriv ut Apparater");
+        System.out.println("8: Skriv ut Øvelser");
+        System.out.println("9: Skriv ut Personer");
+        System.out.println("10: Skriv ut Treningsøkter");
+        System.out.println("11: Skriv ut Øvelsesgrupper");
+        System.out.println("12: Skriv ut hvilke Øvelser som er i Treningsøkt");
+        System.out.println("13: Skriv ut logg for n siste treningsøkter (Use case 2.)");
+        System.out.println("14: Skriv ut resultatlogg for en øvelse (Use case 3.)");
+        System.out.println("15: Skriv ut Øvelser i Øvelsesgruppe (Use case 4.)");
+
         System.out.printf("\nSkriv inn et valg: ");
     }
 
