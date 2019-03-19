@@ -443,13 +443,24 @@ public class DBOperations {
         return returnList;
     }
 
+    public static List<Person> getPersonerMedFavorittovelse(Connection conn, Ovelse o) throws SQLException {
+        List<Person> personList = getPersoner(conn);
+        List<Person> returnList = new ArrayList<>();
+        for (Person p : personList){
+            if (p.getFavorittOvelse().getOvelseID() == o.getOvelseID()){
+                returnList.add(p);
+            }
+        }
+        return returnList;
+    }
+
     public static void printApparater(Connection conn) throws SQLException{
         String queryStatement = "SELECT * FROM Apparat";
         PreparedStatement prepStat = conn.prepareStatement(queryStatement);
         ResultSet rs = prepStat.executeQuery();
 
         while(rs.next()){
-            System.out.println("ID: " + rs.getInt("apparatID") + ", navn: " + rs.getString("navn"));
+            System.out.println("ID: " + rs.getInt("apparatID") + "\tnavn: " + rs.getString("navn"));
         }
     }
 
@@ -459,7 +470,7 @@ public class DBOperations {
         ResultSet rs = prepStat.executeQuery();
 
         while(rs.next()){
-            System.out.println("ID: " + rs.getInt("personID") + ", navn: " + rs.getString("navn"));
+            System.out.println("ID: " + rs.getInt("personID") + "\tnavn: " + rs.getString("navn"));
         }
     }
 
@@ -472,7 +483,7 @@ public class DBOperations {
         while(rs.next()){
             for (Ovelsesgruppe g : gruppeList) {
                 if (rs.getInt("gruppeID") == g.getGruppeID()) {
-                    System.out.println("ID: " + rs.getInt("ovelseID") + ", navn: " + rs.getString("navn") + " Øvelsesgruppe: " + g.getNavn());
+                    System.out.println("ID: " + rs.getInt("ovelseID") + "\tnavn: " + rs.getString("navn") + " Øvelsesgruppe: " + g.getNavn());
                 }
             }
         }
@@ -480,30 +491,20 @@ public class DBOperations {
 
     public static void printTreningsokter(Connection conn) throws SQLException {
         List<Treningsokt> oktList = getTreningsOkter(conn);
-        for (Treningsokt t : oktList){
-            if (t.getPartner() != null){
-                System.out.println("ID: " + t.getOktID() + ", dato: " + t.getDato()+ ", tidspunkt: " + t.getTidspunkt() +
+        for (Treningsokt t : oktList) {
+            if (t.getPartner() != null) {
+                System.out.println("ID: " + t.getOktID() + "\tdato: " + t.getDato() + ", tidspunkt: " + t.getTidspunkt() +
                         " treningspartner: " + t.getPartner().getNavn());
-            }
-            else{
-                System.out.println("ID: " + t.getOktID() + ", dato: " + t.getDato()+ ", tidspunkt: " + t.getTidspunkt());
+            } else {
+                System.out.println("ID: " + t.getOktID() + "\tdato: " + t.getDato() + ", tidspunkt: " + t.getTidspunkt());
             }
         }
-        /*
-        String queryStatement = "SELECT * FROM Treningsokt";
-        PreparedStatement prepStat = conn.prepareStatement(queryStatement);
-        ResultSet rs = prepStat.executeQuery();
-
-        while(rs.next()){
-            System.out.println("ID: " + rs.getInt("oktID") + ", dato: " + rs.getString("dato")+
-                    ", tidspunkt: " + rs.getString("tidspunkt"));
-        }*/
     }
 
     public static void printOvelsesgrupper(Connection conn) throws SQLException {
         List<Ovelsesgruppe> gruppeList = getOvelsesgrupper(conn);
         for (Ovelsesgruppe g : gruppeList){
-            System.out.println("ID: " + g.getGruppeID() + " navn: " + g.getNavn());
+            System.out.println("ID: " + g.getGruppeID() + "\tnavn: " + g.getNavn());
         }
     }
 }

@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1181c822-9b11-45e5-9efd-6a5c170d8765" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/DBOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBOperations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TreningsCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TreningsCtrl.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +32,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="41">
-              <caret line="53" column="55" selection-start-line="53" selection-start-column="55" selection-end-line="53" selection-end-column="55" />
+            <state relative-caret-position="1224">
+              <caret line="68" column="70" selection-start-line="68" selection-start-column="70" selection-end-line="68" selection-end-column="70" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -51,8 +53,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DBOperations.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="763">
-              <caret line="439" column="34" lean-forward="true" selection-start-line="439" selection-start-column="34" selection-end-line="439" selection-end-column="34" />
+            <state relative-caret-position="833">
+              <caret line="506" column="61" selection-start-line="506" selection-start-column="61" selection-end-line="506" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#addOvelsesgruppe#0;class#DBOperations#0" />
@@ -71,10 +73,7 @@
                 <element signature="method#getOvelserITreningsokt#0;class#DBOperations#0" />
                 <element signature="method#getTreningsokterOvelseErI#0;class#DBOperations#0" />
                 <element signature="method#getNSisteTreningsokter#0;class#DBOperations#0" />
-                <element signature="method#printApparater#0;class#DBOperations#0" />
-                <element signature="method#printPersoner#0;class#DBOperations#0" />
-                <element signature="method#printOvelser#0;class#DBOperations#0" />
-                <element signature="method#printTreningsokter#0;class#DBOperations#0" />
+                <element signature="method#getPersonerMedFavorittovelse#0;class#DBOperations#0" />
               </folding>
             </state>
           </provider>
@@ -83,8 +82,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/TreningsCtrl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="869">
-              <caret line="295" column="42" selection-start-line="295" selection-start-column="16" selection-end-line="295" selection-end-column="42" />
+            <state relative-caret-position="567">
+              <caret line="213" column="63" selection-start-line="213" selection-start-column="63" selection-end-line="213" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#addApparat#0;class#TreningsCtrl#0" />
@@ -98,9 +97,9 @@
                 <element signature="method#printPersoner#0;class#TreningsCtrl#0" />
                 <element signature="method#printTreningsokter#0;class#TreningsCtrl#0" />
                 <element signature="method#printOvelsesgrupper#0;class#TreningsCtrl#0" />
+                <element signature="method#printOvelserITreningsokt#0;class#TreningsCtrl#0" />
                 <element signature="method#printTreningsokterOvelseErI#0;class#TreningsCtrl#0" />
                 <element signature="method#printNSisteTreningsokter#0;class#TreningsCtrl#0" />
-                <element signature="method#printOvelserIOvelsesgruppe#0;class#TreningsCtrl#0" />
               </folding>
             </state>
           </provider>
@@ -185,9 +184,9 @@
         <option value="$PROJECT_DIR$/src/Frittstaende.java" />
         <option value="$PROJECT_DIR$/src/Ovelse.java" />
         <option value="$PROJECT_DIR$/src/Fastmontert.java" />
-        <option value="$PROJECT_DIR$/src/DBOperations.java" />
-        <option value="$PROJECT_DIR$/src/TreningsCtrl.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/TreningsCtrl.java" />
+        <option value="$PROJECT_DIR$/src/DBOperations.java" />
       </list>
     </option>
   </component>
@@ -281,12 +280,12 @@
       <workItem from="1552821500638" duration="2013000" />
       <workItem from="1552907843663" duration="9411000" />
       <workItem from="1552999658075" duration="789000" />
-      <workItem from="1553007531153" duration="3460000" />
+      <workItem from="1553007531153" duration="4467000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42137000" />
+    <option name="totallyTimeSpent" value="43144000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
@@ -431,13 +430,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Person.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="23" column="33" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Treningsokt.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1368">
@@ -448,10 +440,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Person.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="23" column="33" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TreningsCtrl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="213" column="63" selection-start-line="213" selection-start-column="63" selection-end-line="213" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#addApparat#0;class#TreningsCtrl#0" />
+            <element signature="method#addOvelsesgruppe#0;class#TreningsCtrl#0" />
+            <element signature="method#addOvelse#0;class#TreningsCtrl#0" />
+            <element signature="method#addTreningsokt#0;class#TreningsCtrl#0" />
+            <element signature="method#addPerson#0;class#TreningsCtrl#0" />
+            <element signature="method#addOvelseToTreningsokt#0;class#TreningsCtrl#0" />
+            <element signature="method#printApparater#0;class#TreningsCtrl#0" />
+            <element signature="method#printOvelser#0;class#TreningsCtrl#0" />
+            <element signature="method#printPersoner#0;class#TreningsCtrl#0" />
+            <element signature="method#printTreningsokter#0;class#TreningsCtrl#0" />
+            <element signature="method#printOvelsesgrupper#0;class#TreningsCtrl#0" />
+            <element signature="method#printOvelserITreningsokt#0;class#TreningsCtrl#0" />
+            <element signature="method#printTreningsokterOvelseErI#0;class#TreningsCtrl#0" />
+            <element signature="method#printNSisteTreningsokter#0;class#TreningsCtrl#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/DBOperations.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="763">
-          <caret line="439" column="34" lean-forward="true" selection-start-line="439" selection-start-column="34" selection-end-line="439" selection-end-column="34" />
+        <state relative-caret-position="833">
+          <caret line="506" column="61" selection-start-line="506" selection-start-column="61" selection-end-line="506" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#addOvelsesgruppe#0;class#DBOperations#0" />
@@ -470,42 +493,15 @@
             <element signature="method#getOvelserITreningsokt#0;class#DBOperations#0" />
             <element signature="method#getTreningsokterOvelseErI#0;class#DBOperations#0" />
             <element signature="method#getNSisteTreningsokter#0;class#DBOperations#0" />
-            <element signature="method#printApparater#0;class#DBOperations#0" />
-            <element signature="method#printPersoner#0;class#DBOperations#0" />
-            <element signature="method#printOvelser#0;class#DBOperations#0" />
-            <element signature="method#printTreningsokter#0;class#DBOperations#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TreningsCtrl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="869">
-          <caret line="295" column="42" selection-start-line="295" selection-start-column="16" selection-end-line="295" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#addApparat#0;class#TreningsCtrl#0" />
-            <element signature="method#addOvelsesgruppe#0;class#TreningsCtrl#0" />
-            <element signature="method#addOvelse#0;class#TreningsCtrl#0" />
-            <element signature="method#addTreningsokt#0;class#TreningsCtrl#0" />
-            <element signature="method#addPerson#0;class#TreningsCtrl#0" />
-            <element signature="method#addOvelseToTreningsokt#0;class#TreningsCtrl#0" />
-            <element signature="method#printApparater#0;class#TreningsCtrl#0" />
-            <element signature="method#printOvelser#0;class#TreningsCtrl#0" />
-            <element signature="method#printPersoner#0;class#TreningsCtrl#0" />
-            <element signature="method#printTreningsokter#0;class#TreningsCtrl#0" />
-            <element signature="method#printOvelsesgrupper#0;class#TreningsCtrl#0" />
-            <element signature="method#printTreningsokterOvelseErI#0;class#TreningsCtrl#0" />
-            <element signature="method#printNSisteTreningsokter#0;class#TreningsCtrl#0" />
-            <element signature="method#printOvelserIOvelsesgruppe#0;class#TreningsCtrl#0" />
+            <element signature="method#getPersonerMedFavorittovelse#0;class#DBOperations#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="53" column="55" selection-start-line="53" selection-start-column="55" selection-end-line="53" selection-end-column="55" />
+        <state relative-caret-position="1224">
+          <caret line="68" column="70" selection-start-line="68" selection-start-column="70" selection-end-line="68" selection-end-column="70" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

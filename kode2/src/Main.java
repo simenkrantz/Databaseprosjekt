@@ -65,6 +65,9 @@ public class Main {
                 case 15:
                     treningsCtrl.printOvelserIOvelsesgruppe();
                     break;
+                case 16:
+                    treningsCtrl.printPersonerMedGittFavorittovelse();
+                    break;
                 default:
                     System.out.println("Ikke et valg, velg igjen");
             }
@@ -93,6 +96,8 @@ public class Main {
         System.out.println("13: Skriv ut logg for n siste treningsøkter (Use case 2.)");
         System.out.println("14: Skriv ut resultatlogg for en øvelse (Use case 3.)");
         System.out.println("15: Skriv ut Øvelser i Øvelsesgruppe (Use case 4.)");
+        System.out.println("16: Skriv ut personer med gitt favorittøvelse (Use case 5.)");
+
 
         System.out.printf("\nSkriv inn et valg: ");
     }

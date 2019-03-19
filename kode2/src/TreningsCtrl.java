@@ -224,7 +224,7 @@ public class TreningsCtrl extends DBConn {
             if (oktID == t.getOktID()){
                 List<Ovelse> ovelseList = DBOperations.getOvelserITreningsokt(conn,t);
                 for (Ovelse o : ovelseList) {
-                    System.out.println("ID: " + o.getOvelseID() + " navn: " + o.getNavn());
+                    System.out.println("ID: " + o.getOvelseID() + "\tnavn: " + o.getNavn());
                 }
                 break;
             }
@@ -260,10 +260,10 @@ public class TreningsCtrl extends DBConn {
                 for (Treningsokt t : oktList) {
                     if (t.getDato().compareTo(fraDato) > 0 && t.getDato().compareTo(tilDato) < 0) {
                         if (t.getPartner() != null) {
-                            System.out.println("ID: " + t.getOktID() + " dato: " + t.getDato() +
+                            System.out.println("ID: " + t.getOktID() + "\tdato: " + t.getDato() +
                                     " tidspunkt: " + t.getTidspunkt() + " treningspartner: " + t.getPartner().getNavn());
                         } else {
-                            System.out.println("ID: " + t.getOktID() + " dato: " + t.getDato() +
+                            System.out.println("ID: " + t.getOktID() + "\tdato: " + t.getDato() +
                                     " tidspunkt: " + t.getTidspunkt());
                         }
                     }
@@ -281,12 +281,12 @@ public class TreningsCtrl extends DBConn {
         List<Treningsokt> oktList = DBOperations.getNSisteTreningsokter(conn, num);
         for (Treningsokt t : oktList){
             if (t.getPartner() != null){
-                System.out.println("ID: " + t.getOktID() + ", dato: " + t.getDato()+ ", tidspunkt: " + t.getTidspunkt() +
+                System.out.println("ID: " + t.getOktID() + "\tdato: " + t.getDato()+ ", tidspunkt: " + t.getTidspunkt() +
                         ", varighet: " + t.getVarighet() + ", form: " + t.getForm()+ ", prestasjon: " + t.getPrestasjon() +
                         " treningspartner: " + t.getPartner().getNavn()+ ", notat: " + t.getNotat());
             }
             else{
-                System.out.println("ID: " + t.getOktID() + ", dato: " + t.getDato()+ ", tidspunkt: " + t.getTidspunkt() +
+                System.out.println("ID: " + t.getOktID() + "\tdato: " + t.getDato()+ ", tidspunkt: " + t.getTidspunkt() +
                         ", varighet: " + t.getVarighet() + ", form: " + t.getForm()+ ", prestasjon: " + t.getPrestasjon() +
                         ", notat: " + t.getNotat());
             }
@@ -306,7 +306,27 @@ public class TreningsCtrl extends DBConn {
             if (g.getGruppeID() == gruppeID) {
                 List<Ovelse> ovelseList = DBOperations.getOvelserIOvelsesgruppe(conn, g);
                 for (Ovelse o : ovelseList) {
-                    System.out.println("ID: " + o.getOvelseID() + " navn: " + o.getNavn());
+                    System.out.println("ID: " + o.getOvelseID() + "\tnavn: " + o.getNavn());
+                }
+                break;
+            }
+        }
+    }
+
+    public void printPersonerMedGittFavorittovelse() throws SQLException {
+        Scanner scanner = new Scanner(System.in);
+
+        printOvelser();
+
+        System.out.println("Skriv inn id på Øvelsen (som du vil se hvem som har som favorittøvelse): ");
+        int ovelseID = Integer.parseInt(scanner.nextLine());
+
+        List<Ovelse> ovelseList = DBOperations.getOvelser(conn);
+        for (Ovelse o : ovelseList) {
+            if (o.getOvelseID() == ovelseID) {
+                List<Person> personList = DBOperations.getPersonerMedFavorittovelse(conn, o);
+                for (Person p : personList) {
+                    System.out.println("ID: " + p.getPersonID() + "\tnavn: " + p.getNavn() + "telefonnummer: " + p.getTelefonNummer());
                 }
                 break;
             }
